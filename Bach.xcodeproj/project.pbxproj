@@ -1,0 +1,920 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		14012F5E189D586E008765B3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F5D189D586E008765B3 /* Cocoa.framework */; };
+		14012F68189D586E008765B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14012F66189D586E008765B3 /* InfoPlist.strings */; };
+		14012F6C189D586E008765B3 /* Bach.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012F6B189D586E008765B3 /* Bach.m */; };
+		14012F73189D586E008765B3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F72189D586E008765B3 /* XCTest.framework */; };
+		14012F74189D586E008765B3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F5D189D586E008765B3 /* Cocoa.framework */; };
+		14012F77189D586E008765B3 /* Bach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F5A189D586E008765B3 /* Bach.framework */; };
+		14012F7D189D586E008765B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14012F7B189D586E008765B3 /* InfoPlist.strings */; };
+		14012F7F189D586E008765B3 /* BachTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012F7E189D586E008765B3 /* BachTests.m */; };
+		14012F8A189D58D1008765B3 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F88189D58D1008765B3 /* CoreAudio.framework */; };
+		14012F8B189D58D1008765B3 /* CoreAudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F89189D58D1008765B3 /* CoreAudioKit.framework */; };
+		14012F8F189D5AB1008765B3 /* BachCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012F8D189D5AB1008765B3 /* BachCommon.m */; };
+		14012F91189D5BBD008765B3 /* FLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F90189D5BBD008765B3 /* FLAC.framework */; };
+		14012F97189D5F72008765B3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F5D189D586E008765B3 /* Cocoa.framework */; };
+		14012F9D189D5F72008765B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14012F9B189D5F72008765B3 /* InfoPlist.strings */; };
+		14012F9F189D5F72008765B3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012F9E189D5F72008765B3 /* main.m */; };
+		14012FA3189D5F72008765B3 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 14012FA1189D5F72008765B3 /* Credits.rtf */; };
+		14012FA6189D5F72008765B3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FA5189D5F72008765B3 /* AppDelegate.m */; };
+		14012FA9189D5F72008765B3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14012FA7189D5F72008765B3 /* MainMenu.xib */; };
+		14012FAB189D5F72008765B3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14012FAA189D5F72008765B3 /* Images.xcassets */; };
+		14012FB1189D5F73008765B3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F72189D586E008765B3 /* XCTest.framework */; };
+		14012FB2189D5F73008765B3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F5D189D586E008765B3 /* Cocoa.framework */; };
+		14012FBA189D5F73008765B3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14012FB8189D5F73008765B3 /* InfoPlist.strings */; };
+		14012FBC189D5F73008765B3 /* ConcertoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FBB189D5F73008765B3 /* ConcertoTests.m */; };
+		14012FCB189D65F9008765B3 /* BachFileSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FC9189D65F9008765B3 /* BachFileSource.h */; };
+		14012FCC189D65F9008765B3 /* BachFileSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FCA189D65F9008765B3 /* BachFileSource.m */; };
+		14012FCF189D681B008765B3 /* BachInput.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FCD189D681B008765B3 /* BachInput.h */; };
+		14012FD0189D681B008765B3 /* BachInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FCE189D681B008765B3 /* BachInput.m */; };
+		14012FD3189D6824008765B3 /* BachOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FD1189D6824008765B3 /* BachOutput.h */; };
+		14012FD4189D6824008765B3 /* BachOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FD2189D6824008765B3 /* BachOutput.m */; };
+		14012FD6189D6A99008765B3 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012FD5189D6A99008765B3 /* AudioUnit.framework */; };
+		14012FD9189D7619008765B3 /* BachCoreAudioParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FD7189D7619008765B3 /* BachCoreAudioParser.h */; };
+		14012FDA189D7619008765B3 /* BachCoreAudioParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FD8189D7619008765B3 /* BachCoreAudioParser.m */; };
+		14012FDE189D7711008765B3 /* BachBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FDC189D7711008765B3 /* BachBuffer.h */; };
+		14012FDF189D7711008765B3 /* BachBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FDD189D7711008765B3 /* BachBuffer.m */; };
+		14012FE1189D7C47008765B3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012FE0189D7C47008765B3 /* AudioToolbox.framework */; };
+		14012FE5189D8ED0008765B3 /* BachParserFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FE3189D8ED0008765B3 /* BachParserFactory.h */; };
+		14012FE6189D8ED0008765B3 /* BachParserFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FE4189D8ED0008765B3 /* BachParserFactory.m */; };
+		14012FE9189D91D9008765B3 /* BachSourceFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FE7189D91D9008765B3 /* BachSourceFactory.h */; };
+		14012FEA189D91D9008765B3 /* BachSourceFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FE8189D91D9008765B3 /* BachSourceFactory.m */; };
+		14012FED189D9760008765B3 /* BachConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FEB189D9760008765B3 /* BachConverter.h */; };
+		14012FEE189D9760008765B3 /* BachConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FEC189D9760008765B3 /* BachConverter.m */; };
+		14012FF1189EA6C0008765B3 /* BachParserType.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FEF189EA6C0008765B3 /* BachParserType.h */; };
+		14012FF7189EE057008765B3 /* Bach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F5A189D586E008765B3 /* Bach.framework */; };
+		142980CD18A1CF07002422C8 /* BachHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 142980CB18A1CF07002422C8 /* BachHelper.h */; };
+		142980CE18A1CF07002422C8 /* BachHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 142980CC18A1CF07002422C8 /* BachHelper.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		14012F75189D586E008765B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14012F51189D586E008765B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14012F59189D586E008765B3;
+			remoteInfo = Bach;
+		};
+		14012FB3189D5F73008765B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 14012F51189D586E008765B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14012F95189D5F72008765B3;
+			remoteInfo = Concerto;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		14012F5A189D586E008765B3 /* Bach.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bach.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14012F5D189D586E008765B3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		14012F60189D586E008765B3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		14012F61189D586E008765B3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		14012F62189D586E008765B3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		14012F65189D586E008765B3 /* Bach-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bach-Info.plist"; sourceTree = "<group>"; };
+		14012F67189D586E008765B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		14012F69189D586E008765B3 /* Bach-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bach-Prefix.pch"; sourceTree = "<group>"; };
+		14012F6A189D586E008765B3 /* Bach.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bach.h; sourceTree = "<group>"; };
+		14012F6B189D586E008765B3 /* Bach.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bach.m; sourceTree = "<group>"; };
+		14012F71189D586E008765B3 /* BachTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BachTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		14012F72189D586E008765B3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		14012F7A189D586E008765B3 /* BachTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BachTests-Info.plist"; sourceTree = "<group>"; };
+		14012F7C189D586E008765B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		14012F7E189D586E008765B3 /* BachTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BachTests.m; sourceTree = "<group>"; };
+		14012F88189D58D1008765B3 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		14012F89189D58D1008765B3 /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
+		14012F8D189D5AB1008765B3 /* BachCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachCommon.m; sourceTree = "<group>"; };
+		14012F90189D5BBD008765B3 /* FLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLAC.framework; path = "Audio-Frameworks/bin/flac/FLAC.framework"; sourceTree = "<group>"; };
+		14012F96189D5F72008765B3 /* Concerto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concerto.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		14012F9A189D5F72008765B3 /* Concerto-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Concerto-Info.plist"; sourceTree = "<group>"; };
+		14012F9C189D5F72008765B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		14012F9E189D5F72008765B3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		14012FA0189D5F72008765B3 /* Concerto-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Concerto-Prefix.pch"; sourceTree = "<group>"; };
+		14012FA2189D5F72008765B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		14012FA4189D5F72008765B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		14012FA5189D5F72008765B3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		14012FA8189D5F72008765B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		14012FAA189D5F72008765B3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		14012FB0189D5F72008765B3 /* ConcertoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConcertoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		14012FB7189D5F73008765B3 /* ConcertoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ConcertoTests-Info.plist"; sourceTree = "<group>"; };
+		14012FB9189D5F73008765B3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		14012FBB189D5F73008765B3 /* ConcertoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConcertoTests.m; sourceTree = "<group>"; };
+		14012FC8189D65D6008765B3 /* BachSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BachSource.h; sourceTree = "<group>"; };
+		14012FC9189D65F9008765B3 /* BachFileSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachFileSource.h; sourceTree = "<group>"; };
+		14012FCA189D65F9008765B3 /* BachFileSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachFileSource.m; sourceTree = "<group>"; };
+		14012FCD189D681B008765B3 /* BachInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachInput.h; sourceTree = "<group>"; };
+		14012FCE189D681B008765B3 /* BachInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachInput.m; sourceTree = "<group>"; };
+		14012FD1189D6824008765B3 /* BachOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachOutput.h; sourceTree = "<group>"; };
+		14012FD2189D6824008765B3 /* BachOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachOutput.m; sourceTree = "<group>"; };
+		14012FD5189D6A99008765B3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		14012FD7189D7619008765B3 /* BachCoreAudioParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachCoreAudioParser.h; sourceTree = "<group>"; };
+		14012FD8189D7619008765B3 /* BachCoreAudioParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachCoreAudioParser.m; sourceTree = "<group>"; };
+		14012FDC189D7711008765B3 /* BachBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachBuffer.h; sourceTree = "<group>"; };
+		14012FDD189D7711008765B3 /* BachBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachBuffer.m; sourceTree = "<group>"; };
+		14012FE0189D7C47008765B3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		14012FE2189D8DA8008765B3 /* BachParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BachParser.h; sourceTree = "<group>"; };
+		14012FE3189D8ED0008765B3 /* BachParserFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachParserFactory.h; sourceTree = "<group>"; };
+		14012FE4189D8ED0008765B3 /* BachParserFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachParserFactory.m; sourceTree = "<group>"; };
+		14012FE7189D91D9008765B3 /* BachSourceFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachSourceFactory.h; sourceTree = "<group>"; };
+		14012FE8189D91D9008765B3 /* BachSourceFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachSourceFactory.m; sourceTree = "<group>"; };
+		14012FEB189D9760008765B3 /* BachConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachConverter.h; sourceTree = "<group>"; };
+		14012FEC189D9760008765B3 /* BachConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachConverter.m; sourceTree = "<group>"; };
+		14012FEF189EA6C0008765B3 /* BachParserType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachParserType.h; sourceTree = "<group>"; };
+		14012FF4189EAAB9008765B3 /* BachParserPropertyKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BachParserPropertyKeys.h; sourceTree = "<group>"; };
+		142980CB18A1CF07002422C8 /* BachHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachHelper.h; sourceTree = "<group>"; };
+		142980CC18A1CF07002422C8 /* BachHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachHelper.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		14012F56189D586E008765B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012FE1189D7C47008765B3 /* AudioToolbox.framework in Frameworks */,
+				14012FD6189D6A99008765B3 /* AudioUnit.framework in Frameworks */,
+				14012F91189D5BBD008765B3 /* FLAC.framework in Frameworks */,
+				14012F8A189D58D1008765B3 /* CoreAudio.framework in Frameworks */,
+				14012F8B189D58D1008765B3 /* CoreAudioKit.framework in Frameworks */,
+				14012F5E189D586E008765B3 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14012F6E189D586E008765B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012F74189D586E008765B3 /* Cocoa.framework in Frameworks */,
+				14012F77189D586E008765B3 /* Bach.framework in Frameworks */,
+				14012F73189D586E008765B3 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14012F93189D5F72008765B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012F97189D5F72008765B3 /* Cocoa.framework in Frameworks */,
+				14012FF7189EE057008765B3 /* Bach.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14012FAD189D5F72008765B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012FB2189D5F73008765B3 /* Cocoa.framework in Frameworks */,
+				14012FB1189D5F73008765B3 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14012F50189D586E008765B3 = {
+			isa = PBXGroup;
+			children = (
+				14012F63189D586E008765B3 /* Bach */,
+				14012F78189D586E008765B3 /* BachTests */,
+				14012F98189D5F72008765B3 /* Concerto */,
+				14012FB5189D5F73008765B3 /* ConcertoTests */,
+				14012F5C189D586E008765B3 /* Frameworks */,
+				14012F5B189D586E008765B3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		14012F5B189D586E008765B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				14012F5A189D586E008765B3 /* Bach.framework */,
+				14012F71189D586E008765B3 /* BachTests.xctest */,
+				14012F96189D5F72008765B3 /* Concerto.app */,
+				14012FB0189D5F72008765B3 /* ConcertoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		14012F5C189D586E008765B3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14012FE0189D7C47008765B3 /* AudioToolbox.framework */,
+				14012FD5189D6A99008765B3 /* AudioUnit.framework */,
+				14012F90189D5BBD008765B3 /* FLAC.framework */,
+				14012F88189D58D1008765B3 /* CoreAudio.framework */,
+				14012F89189D58D1008765B3 /* CoreAudioKit.framework */,
+				14012F5D189D586E008765B3 /* Cocoa.framework */,
+				14012F72189D586E008765B3 /* XCTest.framework */,
+				14012F5F189D586E008765B3 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		14012F5F189D586E008765B3 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14012F60189D586E008765B3 /* Foundation.framework */,
+				14012F61189D586E008765B3 /* CoreData.framework */,
+				14012F62189D586E008765B3 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		14012F63189D586E008765B3 /* Bach */ = {
+			isa = PBXGroup;
+			children = (
+				14012FDB189D7680008765B3 /* BachDispatch */,
+				14012FC7189D63B1008765B3 /* Converter */,
+				14012FC6189D63A9008765B3 /* Parser */,
+				14012FC5189D63A4008765B3 /* Output */,
+				14012FC4189D639E008765B3 /* Input */,
+				14012F6A189D586E008765B3 /* Bach.h */,
+				14012F6B189D586E008765B3 /* Bach.m */,
+				14012F8D189D5AB1008765B3 /* BachCommon.m */,
+				14012F64189D586E008765B3 /* Supporting Files */,
+				142980CB18A1CF07002422C8 /* BachHelper.h */,
+				142980CC18A1CF07002422C8 /* BachHelper.m */,
+			);
+			path = Bach;
+			sourceTree = "<group>";
+		};
+		14012F64189D586E008765B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14012F65189D586E008765B3 /* Bach-Info.plist */,
+				14012F66189D586E008765B3 /* InfoPlist.strings */,
+				14012F69189D586E008765B3 /* Bach-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14012F78189D586E008765B3 /* BachTests */ = {
+			isa = PBXGroup;
+			children = (
+				14012F7E189D586E008765B3 /* BachTests.m */,
+				14012F79189D586E008765B3 /* Supporting Files */,
+			);
+			path = BachTests;
+			sourceTree = "<group>";
+		};
+		14012F79189D586E008765B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14012F7A189D586E008765B3 /* BachTests-Info.plist */,
+				14012F7B189D586E008765B3 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14012F98189D5F72008765B3 /* Concerto */ = {
+			isa = PBXGroup;
+			children = (
+				14012FA4189D5F72008765B3 /* AppDelegate.h */,
+				14012FA5189D5F72008765B3 /* AppDelegate.m */,
+				14012FA7189D5F72008765B3 /* MainMenu.xib */,
+				14012FAA189D5F72008765B3 /* Images.xcassets */,
+				14012F99189D5F72008765B3 /* Supporting Files */,
+			);
+			path = Concerto;
+			sourceTree = "<group>";
+		};
+		14012F99189D5F72008765B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14012F9A189D5F72008765B3 /* Concerto-Info.plist */,
+				14012F9B189D5F72008765B3 /* InfoPlist.strings */,
+				14012F9E189D5F72008765B3 /* main.m */,
+				14012FA0189D5F72008765B3 /* Concerto-Prefix.pch */,
+				14012FA1189D5F72008765B3 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14012FB5189D5F73008765B3 /* ConcertoTests */ = {
+			isa = PBXGroup;
+			children = (
+				14012FBB189D5F73008765B3 /* ConcertoTests.m */,
+				14012FB6189D5F73008765B3 /* Supporting Files */,
+			);
+			path = ConcertoTests;
+			sourceTree = "<group>";
+		};
+		14012FB6189D5F73008765B3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				14012FB7189D5F73008765B3 /* ConcertoTests-Info.plist */,
+				14012FB8189D5F73008765B3 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14012FC4189D639E008765B3 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				14012FC8189D65D6008765B3 /* BachSource.h */,
+				14012FC9189D65F9008765B3 /* BachFileSource.h */,
+				14012FCA189D65F9008765B3 /* BachFileSource.m */,
+				14012FCD189D681B008765B3 /* BachInput.h */,
+				14012FCE189D681B008765B3 /* BachInput.m */,
+				14012FE7189D91D9008765B3 /* BachSourceFactory.h */,
+				14012FE8189D91D9008765B3 /* BachSourceFactory.m */,
+			);
+			name = Input;
+			sourceTree = "<group>";
+		};
+		14012FC5189D63A4008765B3 /* Output */ = {
+			isa = PBXGroup;
+			children = (
+				14012FD1189D6824008765B3 /* BachOutput.h */,
+				14012FD2189D6824008765B3 /* BachOutput.m */,
+			);
+			name = Output;
+			sourceTree = "<group>";
+		};
+		14012FC6189D63A9008765B3 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				14012FD7189D7619008765B3 /* BachCoreAudioParser.h */,
+				14012FD8189D7619008765B3 /* BachCoreAudioParser.m */,
+				14012FE2189D8DA8008765B3 /* BachParser.h */,
+				14012FE3189D8ED0008765B3 /* BachParserFactory.h */,
+				14012FE4189D8ED0008765B3 /* BachParserFactory.m */,
+				14012FEF189EA6C0008765B3 /* BachParserType.h */,
+				14012FF4189EAAB9008765B3 /* BachParserPropertyKeys.h */,
+			);
+			name = Parser;
+			sourceTree = "<group>";
+		};
+		14012FC7189D63B1008765B3 /* Converter */ = {
+			isa = PBXGroup;
+			children = (
+				14012FEB189D9760008765B3 /* BachConverter.h */,
+				14012FEC189D9760008765B3 /* BachConverter.m */,
+			);
+			name = Converter;
+			sourceTree = "<group>";
+		};
+		14012FDB189D7680008765B3 /* BachDispatch */ = {
+			isa = PBXGroup;
+			children = (
+				14012FDC189D7711008765B3 /* BachBuffer.h */,
+				14012FDD189D7711008765B3 /* BachBuffer.m */,
+			);
+			name = BachDispatch;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		14012F57189D586E008765B3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012FE5189D8ED0008765B3 /* BachParserFactory.h in Headers */,
+				14012FCB189D65F9008765B3 /* BachFileSource.h in Headers */,
+				142980CD18A1CF07002422C8 /* BachHelper.h in Headers */,
+				14012FD3189D6824008765B3 /* BachOutput.h in Headers */,
+				14012FED189D9760008765B3 /* BachConverter.h in Headers */,
+				14012FCF189D681B008765B3 /* BachInput.h in Headers */,
+				14012FD9189D7619008765B3 /* BachCoreAudioParser.h in Headers */,
+				14012FE9189D91D9008765B3 /* BachSourceFactory.h in Headers */,
+				14012FDE189D7711008765B3 /* BachBuffer.h in Headers */,
+				14012FF1189EA6C0008765B3 /* BachParserType.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		14012F59189D586E008765B3 /* Bach */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14012F82189D586E008765B3 /* Build configuration list for PBXNativeTarget "Bach" */;
+			buildPhases = (
+				14012F55189D586E008765B3 /* Sources */,
+				14012F56189D586E008765B3 /* Frameworks */,
+				14012F57189D586E008765B3 /* Headers */,
+				14012F58189D586E008765B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Bach;
+			productName = Bach;
+			productReference = 14012F5A189D586E008765B3 /* Bach.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		14012F70189D586E008765B3 /* BachTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14012F85189D586E008765B3 /* Build configuration list for PBXNativeTarget "BachTests" */;
+			buildPhases = (
+				14012F6D189D586E008765B3 /* Sources */,
+				14012F6E189D586E008765B3 /* Frameworks */,
+				14012F6F189D586E008765B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14012F76189D586E008765B3 /* PBXTargetDependency */,
+			);
+			name = BachTests;
+			productName = BachTests;
+			productReference = 14012F71189D586E008765B3 /* BachTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		14012F95189D5F72008765B3 /* Concerto */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14012FBD189D5F73008765B3 /* Build configuration list for PBXNativeTarget "Concerto" */;
+			buildPhases = (
+				14012F92189D5F72008765B3 /* Sources */,
+				14012F93189D5F72008765B3 /* Frameworks */,
+				14012F94189D5F72008765B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Concerto;
+			productName = Concerto;
+			productReference = 14012F96189D5F72008765B3 /* Concerto.app */;
+			productType = "com.apple.product-type.application";
+		};
+		14012FAF189D5F72008765B3 /* ConcertoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14012FC0189D5F73008765B3 /* Build configuration list for PBXNativeTarget "ConcertoTests" */;
+			buildPhases = (
+				14012FAC189D5F72008765B3 /* Sources */,
+				14012FAD189D5F72008765B3 /* Frameworks */,
+				14012FAE189D5F72008765B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14012FB4189D5F73008765B3 /* PBXTargetDependency */,
+			);
+			name = ConcertoTests;
+			productName = ConcertoTests;
+			productReference = 14012FB0189D5F72008765B3 /* ConcertoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		14012F51189D586E008765B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Christian Benincasa";
+				TargetAttributes = {
+					14012F70189D586E008765B3 = {
+						TestTargetID = 14012F59189D586E008765B3;
+					};
+					14012FAF189D5F72008765B3 = {
+						TestTargetID = 14012F59189D586E008765B3;
+					};
+				};
+			};
+			buildConfigurationList = 14012F54189D586E008765B3 /* Build configuration list for PBXProject "Bach" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 14012F50189D586E008765B3;
+			productRefGroup = 14012F5B189D586E008765B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				14012F59189D586E008765B3 /* Bach */,
+				14012F70189D586E008765B3 /* BachTests */,
+				14012F95189D5F72008765B3 /* Concerto */,
+				14012FAF189D5F72008765B3 /* ConcertoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		14012F58189D586E008765B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012F68189D586E008765B3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14012F6F189D586E008765B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012F7D189D586E008765B3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14012F94189D5F72008765B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012F9D189D5F72008765B3 /* InfoPlist.strings in Resources */,
+				14012FAB189D5F72008765B3 /* Images.xcassets in Resources */,
+				14012FA3189D5F72008765B3 /* Credits.rtf in Resources */,
+				14012FA9189D5F72008765B3 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14012FAE189D5F72008765B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012FBA189D5F73008765B3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		14012F55189D586E008765B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012FD0189D681B008765B3 /* BachInput.m in Sources */,
+				14012FE6189D8ED0008765B3 /* BachParserFactory.m in Sources */,
+				14012FCC189D65F9008765B3 /* BachFileSource.m in Sources */,
+				14012FDA189D7619008765B3 /* BachCoreAudioParser.m in Sources */,
+				14012FEA189D91D9008765B3 /* BachSourceFactory.m in Sources */,
+				14012F8F189D5AB1008765B3 /* BachCommon.m in Sources */,
+				14012FEE189D9760008765B3 /* BachConverter.m in Sources */,
+				142980CE18A1CF07002422C8 /* BachHelper.m in Sources */,
+				14012FDF189D7711008765B3 /* BachBuffer.m in Sources */,
+				14012FD4189D6824008765B3 /* BachOutput.m in Sources */,
+				14012F6C189D586E008765B3 /* Bach.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14012F6D189D586E008765B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012F7F189D586E008765B3 /* BachTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14012F92189D5F72008765B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012FA6189D5F72008765B3 /* AppDelegate.m in Sources */,
+				14012F9F189D5F72008765B3 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14012FAC189D5F72008765B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14012FBC189D5F73008765B3 /* ConcertoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		14012F76189D586E008765B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14012F59189D586E008765B3 /* Bach */;
+			targetProxy = 14012F75189D586E008765B3 /* PBXContainerItemProxy */;
+		};
+		14012FB4189D5F73008765B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14012F95189D5F72008765B3 /* Concerto */;
+			targetProxy = 14012FB3189D5F73008765B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		14012F66189D586E008765B3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14012F67189D586E008765B3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		14012F7B189D586E008765B3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14012F7C189D586E008765B3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		14012F9B189D5F72008765B3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14012F9C189D5F72008765B3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		14012FA1189D5F72008765B3 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14012FA2189D5F72008765B3 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		14012FA7189D5F72008765B3 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14012FA8189D5F72008765B3 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		14012FB8189D5F73008765B3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				14012FB9189D5F73008765B3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		14012F80189D586E008765B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LD_RUNPATH_SEARCH_PATHS = /Applications/Xcode.app/Contents/Developer/Library/Frameworks/;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		14012F81189D586E008765B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LD_RUNPATH_SEARCH_PATHS = /Applications/Xcode.app/Contents/Developer/Library/Frameworks/;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		14012F83189D586E008765B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/christianbenincasa/Dev/objc/Bach/Audio-Frameworks/bin/flac",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bach/Bach-Prefix.pch";
+				INFOPLIST_FILE = "Bach/Bach-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		14012F84189D586E008765B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/christianbenincasa/Dev/objc/Bach/Audio-Frameworks/bin/flac",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bach/Bach-Prefix.pch";
+				INFOPLIST_FILE = "Bach/Bach-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		14012F86189D586E008765B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bach.framework/Versions/A/Bach";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bach/Bach-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "BachTests/BachTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		14012F87189D586E008765B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bach.framework/Versions/A/Bach";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bach/Bach-Prefix.pch";
+				INFOPLIST_FILE = "BachTests/BachTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		14012FBE189D5F73008765B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Concerto/Concerto-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Concerto/Concerto-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		14012FBF189D5F73008765B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Concerto/Concerto-Prefix.pch";
+				INFOPLIST_FILE = "Concerto/Concerto-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		14012FC1189D5F73008765B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bach.framework/Versions/A/Bach";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Concerto/Concerto-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ConcertoTests/ConcertoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		14012FC2189D5F73008765B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Bach.framework/Versions/A/Bach";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Concerto/Concerto-Prefix.pch";
+				INFOPLIST_FILE = "ConcertoTests/ConcertoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		14012F54189D586E008765B3 /* Build configuration list for PBXProject "Bach" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14012F80189D586E008765B3 /* Debug */,
+				14012F81189D586E008765B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14012F82189D586E008765B3 /* Build configuration list for PBXNativeTarget "Bach" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14012F83189D586E008765B3 /* Debug */,
+				14012F84189D586E008765B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14012F85189D586E008765B3 /* Build configuration list for PBXNativeTarget "BachTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14012F86189D586E008765B3 /* Debug */,
+				14012F87189D586E008765B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14012FBD189D5F73008765B3 /* Build configuration list for PBXNativeTarget "Concerto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14012FBE189D5F73008765B3 /* Debug */,
+				14012FBF189D5F73008765B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14012FC0189D5F73008765B3 /* Build configuration list for PBXNativeTarget "ConcertoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14012FC1189D5F73008765B3 /* Debug */,
+				14012FC2189D5F73008765B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 14012F51189D586E008765B3 /* Project object */;
+}
