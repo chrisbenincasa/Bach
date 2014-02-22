@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, BachParserPropertyKeys) {
     FRAMES_PER_PACKET,
     BITS_PER_CHANNEL,
     CHANNELS,
+    TOTAL_FRAMES,
     SAMPLE_RATE,
     ENDIAN,
     UNSIGNED

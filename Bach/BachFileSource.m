@@ -11,31 +11,39 @@
 @implementation BachFileSource
 
 @synthesize url;
+@synthesize size;
 
 -(BachParserType) parserType {
     return CoreAudio;
 }
 
--(long) size {
-    long curpos = ftell(_fd);
-    fseek (_fd, 0, SEEK_END);
-    long size = ftell(_fd);
-    fseek(_fd, curpos, SEEK_SET);
-	return size;
-}
-
--(BOOL) open:(NSURL *)url {
-	[self setUrl:url];
-	_fd = fopen([[self.url path] UTF8String], "r");
-	return (_fd != NULL);
+-(BOOL) open:(NSURL *)newUrl {
+	[self setUrl:newUrl];
+	_fd = fopen([[self.url path] UTF8String], "rb");
+    if (_fd != NULL) {
+        fseek (_fd, 0, SEEK_END);
+        self.size = ftell(_fd);
+        rewind(_fd);
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 -(int) read:(void *)buffer amount:(int)amount {
 	return fread(buffer, 1, amount, _fd);
 }
 
--(BOOL) seek:(long)position whence:(int)whence {
-	return (fseek(_fd, position, whence) == 0);
+-(long)tell {
+    return ftell(_fd);
+}
+
+-(BOOL) seek:(long)position startingPosition:(int)startPos {
+	return (fseek(_fd, position, startPos) == 0);
+}
+
+-(BOOL) endOfSource {
+    return ftell(_fd) == SEEK_END;
 }
 
 @end

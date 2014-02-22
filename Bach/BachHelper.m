@@ -19,4 +19,14 @@
     return instance;
 }
 
+-(long) moveBytes:(unsigned int)nBytes to:(void*)to from:(NSMutableData*) from {
+    long bytesToMove = (nBytes < [from length]) ? nBytes : [from length];
+    dispatch_sync([BachBuffer input_queue], ^{
+        memcpy(to, [from bytes], bytesToMove);
+        [from replaceBytesInRange:NSMakeRange(0, bytesToMove) withBytes:NULL length:0];
+    });
+    
+    return bytesToMove;
+}
+
 @end

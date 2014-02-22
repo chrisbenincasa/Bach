@@ -7,5 +7,6 @@
 //
 
 typedef enum bachParserTypes {
-    CoreAudio
+    CoreAudio,
+    Flac
 } BachParserType;

@@ -20,6 +20,7 @@
         _output = NULL;
         [self setup];
         _converter = converter;
+        _amountPlayed = 0;
     }
     
     return self;
@@ -32,7 +33,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         err = AudioOutputUnitStart(_output);
         if (err != 0) {
-            NSLog(@"error playinh shit");
+            NSLog(@"error playing shit");
         }
     });
 }
@@ -58,6 +59,7 @@
 -(void) stop {
     isPlaying = NO;
     isProcessing = NO;
+    _amountPlayed = 0;
     AudioOutputUnitStop(_output);
 }
 
@@ -67,6 +69,10 @@
 
 -(void) mute {
     [self setVolume:0.0];
+}
+
+-(double) secondsPlayed {
+    return (_amountPlayed / _format.mBytesPerFrame) / _format.mSampleRate;
 }
 
 -(BOOL) setup {
@@ -115,8 +121,6 @@
     
     streamDesc.mChannelsPerFrame = 2;
     streamDesc.mFormatID = kAudioFormatLinearPCM;
-//    streamDesc.mFormatFlags &= ~kLinearPCMFormatFlagIsNonInterleaved;
-//    streamDesc.mFormatFlags &= ~kLinearPCMFormatFlagIsFloat;
     streamDesc.mFormatFlags = kAudioFormatFlagIsSignedInteger;
     streamDesc.mBytesPerFrame = streamDesc.mChannelsPerFrame * (streamDesc.mBitsPerChannel / 8);
     streamDesc.mBytesPerPacket = streamDesc.mBytesPerFrame * streamDesc.mFramesPerPacket;
@@ -124,9 +128,7 @@
     err = AudioUnitSetProperty(_output, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &streamDesc, size);
     
     if (err != 0) {
-        NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain
-                                             code:err
-                                         userInfo:nil];
+        NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:err userInfo:nil];
         NSLog(@"Error: %@", [error localizedDescription]);
         return NO;
     }
@@ -150,27 +152,18 @@
     UInt32 size = sizeof(AudioStreamBasicDescription);
     _format.mSampleRate = sampleRate;
     
-    err = AudioUnitSetProperty(_output,
-                         kAudioUnitProperty_StreamFormat,
-                         kAudioUnitScope_Output,
-                         0,
-                         &_format,
-                         size);
+    err = AudioUnitSetProperty(_output, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &_format, size);
     
     if (err != 0) {
         NSLog(@"unable to set sample rate for output");
     }
     
-    err = AudioUnitSetProperty(_output,
-                         kAudioUnitProperty_StreamFormat,
-                         kAudioUnitScope_Input,
-                         0,
-                         &_format,
-                         size);
+    err = AudioUnitSetProperty(_output, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &_format, size);
     
     if (err != 0) {
         NSLog(@"unable to set sample rate for input");
     }
+    [self setFormat:_format];
 }
 
 -(int)readData:(void*)to amount:(unsigned int) nBytes {
@@ -179,31 +172,34 @@
         return 0;
     }
     
-    int bytesRead = [_converter moveBytes:to bytes:nBytes];
+    long bytesRead = [[BachHelper getInstance] moveBytes:nBytes to:to from:[_converter convertedBytes]];
+    _amountPlayed += bytesRead;
     
     if ([_converter shouldBuffer]) {
         dispatch_source_merge_data([BachBuffer buffer_dispatch_source], 1);
     }
     
-    return bytesRead;
+    return (int) bytesRead;
 }
 
 static OSStatus renderCallback (void* inRefCon, AudioUnitRenderActionFlags* ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames,AudioBufferList * ioData) {
     
-    BachOutput* output = (__bridge BachOutput*)inRefCon;
-    void* readPointer = ioData->mBuffers[0].mData;
-    
-    int bytesToRead = inNumberFrames * [output format].mBytesPerFrame;
-    int bytesRead = [output readData:readPointer amount:bytesToRead];
-    
-    if (bytesRead < bytesToRead) {
-        int bytesReRead = [output readData:(readPointer + bytesRead) amount:bytesToRead - bytesRead];
-        bytesRead += bytesReRead;
+    @autoreleasepool {
+        BachOutput* output = (__bridge BachOutput*)inRefCon;
+        void* readPointer = ioData->mBuffers[0].mData;
+        
+        int bytesToRead = inNumberFrames * [output format].mBytesPerFrame;
+        int bytesRead = [output readData:readPointer amount:bytesToRead];
+        
+        if (bytesRead < bytesToRead) {
+            int bytesReRead = [output readData:(readPointer + bytesRead) amount:bytesToRead - bytesRead];
+            bytesRead += bytesReRead;
+        }
+        
+        ioData->mBuffers[0].mNumberChannels = [output format].mChannelsPerFrame;
+        ioData->mBuffers[0].mDataByteSize = bytesRead;
+        ioData->mNumberBuffers = 1;
     }
-    
-    ioData->mBuffers[0].mNumberChannels = [output format].mChannelsPerFrame;
-    ioData->mBuffers[0].mDataByteSize = bytesRead;
-    ioData->mNumberBuffers = 1;
     
     return 0;
 }

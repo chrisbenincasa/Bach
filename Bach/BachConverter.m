@@ -15,8 +15,21 @@
 
 -(id) init {
     if (self = [super init]) {
+        _readSize = 1024 * 16;
+        _bufferSize = 1024 * 128;
         _convertedBytes = [NSMutableData data];
-        _toConvertBuffer = malloc(1024 * 16);
+        _toConvertBuffer = malloc(_readSize);
+    }
+    
+    return self;
+}
+
+-(id) initWithBufferSize:(unsigned int) nBytes {
+    if (self = [super init]) {
+        _bufferSize = nBytes;
+        _readSize = nBytes / 8;
+        _convertedBytes = [NSMutableData data];
+        _toConvertBuffer = malloc(_readSize);
     }
     
     return self;
@@ -30,18 +43,18 @@
 -(void) convert {
     int convertedAmount = 0;
     while (convertedAmount >= 0) {
-        if ([_convertedBytes length] >= 1024 * 128) {
+        if ([_convertedBytes length] >= _bufferSize) {
             break;
         }
         
-        convertedAmount = [self convertBytes:_toConvertBuffer bytes:16 * 1024];
+        convertedAmount = [self convertBytes:_toConvertBuffer bytes:_readSize];
         dispatch_sync([BachBuffer input_queue], ^{
             [_convertedBytes appendBytes:_toConvertBuffer length: convertedAmount];
         });
     }
     
     if (![output processing]) {
-        if ([_convertedBytes length] < 1024 * 128) {
+        if ([_convertedBytes length] < _bufferSize) {
             dispatch_source_merge_data([BachBuffer buffer_dispatch_source], 1);
             return;
         }
@@ -63,6 +76,7 @@
     err = AudioConverterFillComplexBuffer(_converterRef, fillConverterCallback, (__bridge void *)(self), &framesToConvert, &buffers, NULL);
     
     int amountRead = buffers.mBuffers[0].mDataByteSize;
+    
     if (err == kAudioConverterErr_InvalidInputSize)	{
         amountRead += [self convertBytes:buffer + amountRead bytes:nBytes - amountRead];
     }
@@ -78,18 +92,17 @@
     return amountRead;
 }
 
--(void) setupInput:(BachInput *)input {
+-(void) setupInput:(BachInput *) input {
     self.input = input;
     _inputInfo = [[self input] format];
 }
 
--(void) setupOutput:(BachOutput *)output {
+-(void) setupOutput:(BachOutput *) output {
     self.output = output;
+    [self.output setSampleRate:_inputInfo.mSampleRate];
     _outputInfo = [[self output] format];
     
-    [self.output setSampleRate:_inputInfo.mSampleRate];
-    
-    _callbackBuffer = malloc((1024 * 16 / _outputInfo.mBytesPerFrame) * _inputInfo.mBytesPerPacket);
+    _callbackBuffer = malloc((_readSize / _outputInfo.mBytesPerFrame) * _inputInfo.mBytesPerPacket);
     
     OSStatus err = AudioConverterNew(&_inputInfo, &_outputInfo, &_converterRef);
     
@@ -108,19 +121,8 @@
     }
 }
 
--(int) moveBytes:(void*) buffer bytes:(unsigned int) nBytes {
-    long bytesToRead = (nBytes < [_convertedBytes length]) ? nBytes : [_convertedBytes length];
-    
-    dispatch_sync([BachBuffer input_queue], ^{
-        memcpy(buffer, [_convertedBytes bytes], bytesToRead);
-        [_convertedBytes replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
-    });
-    
-    return bytesToRead;
-}
-
 -(BOOL) shouldBuffer {
-    return [_convertedBytes length] <= 0.5 * (1024 * 128) && ![input processing];
+    return [_convertedBytes length] <= 0.5 * (_bufferSize) && ![input processing]; // TODO: Adjust this
 }
 
 static OSStatus fillConverterCallback(AudioConverterRef inConverter, UInt32 *ioNumberDataPackets, AudioBufferList *ioData, AudioStreamPacketDescription **outDataPacketDescription, void *inUserData) {
@@ -128,16 +130,18 @@ static OSStatus fillConverterCallback(AudioConverterRef inConverter, UInt32 *ioN
     BachConverter* converter = (__bridge BachConverter*) inUserData;
     
     int bytesToMove = (*ioNumberDataPackets) * [[converter input] format].mBytesPerPacket;
-    int writeAmount = [[converter input] moveBytes:[converter callbackBuffer] bytes:bytesToMove];
+    long writeAmount = [[BachHelper getInstance] moveBytes:bytesToMove to:[converter callbackBuffer] from:[[converter input] buffer]];
+    
+    if (writeAmount == 0) {
+        ioData->mBuffers[0].mDataByteSize = 0;
+        *ioNumberDataPackets = 0;
+        return 100;
+    }
     
     ioData->mBuffers[0].mData = [converter callbackBuffer];
     ioData->mBuffers[0].mDataByteSize = writeAmount;
     ioData->mBuffers[0].mNumberChannels = 2;
     ioData->mNumberBuffers = 1;
-    
-    if (writeAmount == 0) {
-        return 100;
-    }
     
     return 0;
 }

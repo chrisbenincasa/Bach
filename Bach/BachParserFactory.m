@@ -9,15 +9,17 @@
 #import "BachParserFactory.h"
 
 #import "BachCoreAudioParser.h"
+#import "BachFlacParser.h"
 
 @implementation BachParserFactory
 
-+(id<BachParser>) create: (BachParserType) type {
-    switch (type) {
-        case CoreAudio:
-            return [[BachCoreAudioParser alloc] init];
-        default:
-            return nil;
++(id<BachParser>) create: (NSString*) ext {
+    if ([[BachCoreAudioParser fileTypes] containsObject:ext]) {
+        return [[BachCoreAudioParser alloc] init];
+    } else if ([[BachFlacParser fileTypes] containsObject:ext]) {
+        return [[BachFlacParser alloc] init];
+    } else {
+        return nil;
     }
 }
 

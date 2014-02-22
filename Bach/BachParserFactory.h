@@ -15,6 +15,6 @@
 
 @interface BachParserFactory : NSObject
 
-+(id<BachParser>) create: (BachParserType) type;
++(id<BachParser>) create: (NSString*) ext;
 
 @end

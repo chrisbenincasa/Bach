@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
-//#import <Foundation/Foundation.h>
 #import "BachSource.h"
+
+#import <Foundation/Foundation.h>
 
 @interface BachFileSource : NSObject<BachSource>
 

@@ -6,21 +6,23 @@
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #import "BachParserType.h"
+
+#import <Foundation/Foundation.h>
 
 @protocol BachSource <NSObject>
 
 @required
 
 @property(strong, nonatomic) NSURL* url;
+@property(assign, nonatomic) long size;
 
 -(BachParserType) parserType;
 
--(BOOL) open: (NSURL*) url;
--(int) read:(void *)buffer amount:(int) amount;
--(long) size;
--(BOOL) seek:(long)position whence:(int) whence;
+-(BOOL)open: (NSURL*) url;
+-(int)read:(void *)buffer amount:(int) amount;
+-(BOOL) seek:(long)position startingPosition:(int)startPos;
+-(long)tell;
+-(BOOL)endOfSource;
 
 @end

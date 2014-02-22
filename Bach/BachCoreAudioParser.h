@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
+#import "BachBuffer.h"
+#import "BachParser.h"
+
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
-#import "BachParser.h"
 
 @interface BachCoreAudioParser : NSObject <BachParser>
 

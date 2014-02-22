@@ -13,6 +13,7 @@
 @synthesize description;
 @synthesize properties;
 @synthesize source;
+@synthesize metadata;
 
 +(NSArray*) fileTypes {
     NSArray* extensions;
@@ -33,6 +34,7 @@
      [NSNumber numberWithInteger:_bitsPerChannel], [NSNumber numberWithInteger:BITS_PER_CHANNEL],
      [NSNumber numberWithInteger:_framesPerPacket], [NSNumber numberWithInteger:FRAMES_PER_PACKET],
      [NSNumber numberWithInteger:_channels], [NSNumber numberWithInteger:CHANNELS],
+     [NSNumber numberWithInteger:_totalFrames], [NSNumber numberWithInteger:TOTAL_FRAMES],
      [NSNumber numberWithInteger:_sampleRate], [NSNumber numberWithInteger:SAMPLE_RATE],
      @"big", [NSNumber numberWithInteger:ENDIAN], nil];
 }
@@ -64,10 +66,24 @@
     return [self readFrames:buffer frames:packetsToRead] / _framesPerPacket;
 }
 
+-(void) seek:(float)position {
+    OSStatus err;
+    err = ExtAudioFileSeek(_extAudioFile, position);
+    if (!err) {
+#if BACH_DEBUG
+        NSLog(@"unable to seek to position");
+#endif
+    }
+}
+
+-(void) flush {
+    // NOP
+}
+
 -(BOOL) openSource:(id<BachSource>) src {
     self.source = src;
     OSStatus err;
-        
+    
     err = AudioFileOpenWithCallbacks((__bridge void*) source, readAudioFile, NULL, getSizeProc, NULL, 0, &_audioFile);
     
     if (err != 0) {
@@ -101,25 +117,56 @@
         return NO;
     }
     
-    SInt64 totalSize;
-    size = sizeof(totalSize);
-    err = ExtAudioFileGetProperty(_extAudioFile, kExtAudioFileProperty_FileLengthFrames, &size, &totalSize);
+    /*
+     // double buffer size fo 128K
+     UInt32 bufferSizeBytes = 1024 * 128;
+     UInt32 uint32Size = sizeof(UInt32);
     
-    if (err != 0) {
-        ExtAudioFileDispose(_extAudioFile);
-        return NO;
+     err = ExtAudioFileSetProperty(_extAudioFile, kExtAudioFileProperty_IOBufferSizeBytes, uint32Size, &bufferSizeBytes);
+    */
+    
+    // TODO: seems to be bottleneck...investigate more
+    // if we have a main queue (we usually do) we can get this asynchroniously
+    if (dispatch_get_main_queue()) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            SInt64 totalSize;
+            UInt32 size = sizeof(totalSize);
+            OSStatus err = ExtAudioFileGetProperty(_extAudioFile, kExtAudioFileProperty_FileLengthFrames, &size, &totalSize);
+            
+            if (err != 0) {
+                ExtAudioFileDispose(_extAudioFile);
+            }
+            
+            _totalFrames = totalSize;
+        });
+    } else {
+        SInt64 totalSize;
+        UInt32 size = sizeof(totalSize);
+        err = ExtAudioFileGetProperty(_extAudioFile, kExtAudioFileProperty_FileLengthFrames, &size, &totalSize);
+        
+        if (err != 0) {
+            ExtAudioFileDispose(_extAudioFile);
+        }
+        
+        _totalFrames = totalSize;
     }
-    
-    _totalFrames = totalSize;
-    
+
     AudioFileID audioFile;
     size = sizeof(audioFile);
     err = ExtAudioFileGetProperty(_extAudioFile, kExtAudioFileProperty_AudioFile, &size, &audioFile);
     
-    if (err != 0) {
-        // get metadata
+    if (err == 0) {
+        // Load metadata asynchroniously?
+        UInt32 dictionarySize = 0;
+        err = AudioFileGetPropertyInfo(audioFile, kAudioFilePropertyInfoDictionary, &dictionarySize, 0);
+        if (!err) {
+            CFDictionaryRef dictionary;
+            AudioFileGetProperty(audioFile, kAudioFilePropertyInfoDictionary, &dictionarySize, &dictionary);
+            self.metadata = [NSMutableDictionary dictionaryWithDictionary:(__bridge NSDictionary *)dictionary];
+            CFRelease(dictionary);
+        }
     }
-    
+
     AudioStreamBasicDescription result;
     bzero(&result, sizeof(AudioStreamBasicDescription));
     
@@ -155,7 +202,7 @@
 
 static OSStatus readAudioFile(void* clientData, SInt64 inPosition, UInt32 requestCount, void* buffer, UInt32* actualCount) {
     id<BachSource> src = (__bridge id<BachSource>) clientData;
-    [src seek:(long)inPosition whence:0];
+    [src seek:(long)inPosition startingPosition:0];
     *actualCount = [src read:buffer amount:requestCount];
     return 0;
 }

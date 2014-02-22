@@ -14,17 +14,21 @@
 
 -(id) init {
     if (self = [super init]) {
+        _bufferSize = 1024 * 128;
+        _readSize = _bufferSize / 8;
         _buffer = [NSMutableData data];
-        _inputBuf = malloc(1024 * 16);
+        _inputBuf = malloc(_readSize);
     }
     
     return self;
 }
 
--(id) initWithBufferSize:(unsigned int)nBytes {
+-(id) initWithBufferSize:(unsigned int) nBytes {
     if (self = [super init]) {
+        _bufferSize = nBytes;
+        _readSize = _bufferSize / 8;
         _buffer = [NSMutableData data];
-        _inputBuf = malloc(nBytes);
+        _inputBuf = malloc(_readSize);
     }
     return self;
 }
@@ -37,24 +41,32 @@
     _source = [BachSourceFactory create:url];
     
     if (!_source) {
+#if BACH_DEBUG
         NSLog(@"unable to initialize source");
+#endif
         return NO;
     }
     
     if (![_source open:url]) {
+#if BACH_DEBUG
         NSLog(@"unable to open url within source");
+#endif
         return NO;
     }
     
-    _parser = [BachParserFactory create:[_source parserType]];
+    _parser = [BachParserFactory create:[url pathExtension]];
     
     if (!_parser) {
+#if BACH_DEBUG
         NSLog(@"unable to initialize parser");
+#endif
         return NO;
     }
     
     if (![_parser openSource:_source]) {
+#if BACH_DEBUG
         NSLog(@"unable to open source within parser");
+#endif
         return NO;
     }
     
@@ -71,12 +83,12 @@
     int framesRead = 0;
     
     while(processing && framesRead >= 0) {
-        if ([_buffer length] >= 1024 * 128) {
+        if ([_buffer length] >= _bufferSize) {
             processing = NO;
             break;
         }
         
-        framesRead = [_parser readFrames:_inputBuf frames:(16 * 1024) / _bytesPerFrame];
+        framesRead = [_parser readFrames:_inputBuf frames:(_readSize / _bytesPerFrame)];
         bufferLength = framesRead * _bytesPerFrame;
         
         dispatch_sync([BachBuffer input_queue], ^{
@@ -91,15 +103,19 @@
     processing = NO;
 }
 
--(int) moveBytes:(void*) buffer bytes:(int) nBytes {
-    int bytesToRead = (nBytes < [_buffer length]) ? nBytes : (int)[_buffer length];
-    
-    dispatch_sync([BachBuffer input_queue], ^{
-        memcpy(buffer, [_buffer bytes], bytesToRead);
-        [_buffer replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
-    });
-    
-    return bytesToRead;
+-(void) seek:(float) time flush:(BOOL) flush {
+    _seekPosition = time * [[[_parser properties] objectForKey:[NSNumber numberWithInteger:SAMPLE_RATE]] floatValue];
+    if (flush) {
+        dispatch_sync([BachBuffer input_queue], ^{
+            [_buffer setLength:0];
+        });
+        [_parser flush];
+    }
+    [_parser seek: _seekPosition];
+}
+
+-(double) totalFrames {
+    return [[[_parser properties] objectForKey:[NSNumber numberWithInteger:TOTAL_FRAMES]] doubleValue];
 }
 
 -(AudioStreamBasicDescription) format {
@@ -126,6 +142,10 @@
     }
     
     return desc;
+}
+
+-(NSDictionary*) metadata {
+    return [_parser metadata];
 }
 
 @end

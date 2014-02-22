@@ -17,6 +17,9 @@
 
 @interface BachInput : NSObject
 
+@property(assign, nonatomic) unsigned int bufferSize;
+@property(assign, nonatomic) unsigned int readSize;
+
 @property(strong, nonatomic) NSMutableData* buffer;
 @property(assign, nonatomic) void* inputBuf;
 
@@ -27,11 +30,15 @@
 
 @property(assign, nonatomic, readonly) BOOL processing;
 @property(assign, nonatomic, readonly) BOOL atEnd;
+@property(assign, nonatomic) BOOL shouldSeek;
+@property(assign, nonatomic) float seekPosition;
 
 -(id) initWithBufferSize:(unsigned int) nBytes;
 -(BOOL) openUrl: (NSURL*) url;
 -(void) decode;
--(int) moveBytes:(void*) buffer bytes:(int) nBytes;
+-(void) seek:(float) time flush:(BOOL) flush;
+-(double)totalFrames;
 -(AudioStreamBasicDescription) format;
+-(NSDictionary*) metadata;
 
 @end

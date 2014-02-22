@@ -10,7 +10,7 @@
 
 @implementation BachBuffer
 
-+ (dispatch_queue_t) input_queue {
++(dispatch_queue_t) input_queue {
     static dispatch_queue_t queue;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
@@ -20,7 +20,7 @@
     return queue;
 }
 
-+ (dispatch_queue_t) process_queue {
++(dispatch_queue_t) process_queue {
     static dispatch_queue_t queue;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
@@ -30,7 +30,7 @@
     return queue;
 }
 
-+ (dispatch_source_t) buffer_dispatch_source {
++(dispatch_source_t) buffer_dispatch_source {
     static dispatch_source_t source;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
