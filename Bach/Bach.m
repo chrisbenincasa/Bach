@@ -112,7 +112,7 @@
 -(void) seek:(float)position {
     if ([_output processing]) {
         [_output setAmountPlayed:position * [_output format].mBytesPerFrame * [_output format].mSampleRate];
-        [_input seek:position flush:[_output playing]];
+        [_input seek:position flush:YES];
     }
 }
 

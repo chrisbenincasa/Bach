@@ -40,8 +40,16 @@
         if (_bufferFrames == 0) {
             if (FLAC__stream_decoder_get_state(_decoder) == FLAC__STREAM_DECODER_END_OF_STREAM) {
                 break;
+            } else if (FLAC__stream_decoder_get_state(_decoder) == FLAC__STREAM_DECODER_SEEK_ERROR) {
+                FLAC__stream_decoder_flush(_decoder);
             }
-            FLAC__stream_decoder_process_single(_decoder);
+            int result = FLAC__stream_decoder_process_single(_decoder);
+#if __BACH_DEBUG
+            if (!result) {
+                FLAC__StreamDecoderState state = FLAC__stream_decoder_get_state(_decoder);
+                NSLog(@"%s", FLAC__StreamDecoderStateString[state]);
+            }
+#endif
         }
         
         int framesToRead = _bufferFrames;
@@ -72,11 +80,13 @@
     self.source = src;
     
     _decoder = FLAC__stream_decoder_new();
-    
+
+#if __BACH_DEBUG
     if (!_decoder) {
         NSLog(@"decoder could not be enabled");
         return NO;
     }
+#endif
     
     FLAC__StreamDecoderInitStatus err;
     

@@ -14,8 +14,6 @@
 
 #import <Foundation/Foundation.h>
 
-#define __BACH_DEBUG 1
-
 typedef NS_ENUM(NSInteger, BachState) {
     Playing,
     Paused,
