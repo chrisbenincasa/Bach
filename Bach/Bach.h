@@ -12,6 +12,10 @@
 #import "BachInput.h"
 #import "BachOutput.h"
 
+#if __BACH_DEBUG
+#import "BachStopwatch.h"
+#endif
+
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, BachState) {

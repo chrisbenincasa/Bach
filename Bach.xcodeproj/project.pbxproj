@@ -49,6 +49,8 @@
 		14012FEE189D9760008765B3 /* BachConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FEC189D9760008765B3 /* BachConverter.m */; };
 		14012FF1189EA6C0008765B3 /* BachParserType.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FEF189EA6C0008765B3 /* BachParserType.h */; };
 		14012FF7189EE057008765B3 /* Bach.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F5A189D586E008765B3 /* Bach.framework */; };
+		140A4E8718B909D3009AE87A /* BachStopwatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 140A4E8518B909D3009AE87A /* BachStopwatch.h */; };
+		140A4E8818B909D3009AE87A /* BachStopwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 140A4E8618B909D3009AE87A /* BachStopwatch.m */; };
 		142980CD18A1CF07002422C8 /* BachHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 142980CB18A1CF07002422C8 /* BachHelper.h */; };
 		142980CE18A1CF07002422C8 /* BachHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 142980CC18A1CF07002422C8 /* BachHelper.m */; };
 		1434610A18A690F10072FE29 /* BachConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 1434610818A690F10072FE29 /* BachConstants.h */; };
@@ -134,6 +136,8 @@
 		14012FEC189D9760008765B3 /* BachConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachConverter.m; sourceTree = "<group>"; };
 		14012FEF189EA6C0008765B3 /* BachParserType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachParserType.h; sourceTree = "<group>"; };
 		14012FF4189EAAB9008765B3 /* BachParserPropertyKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BachParserPropertyKeys.h; sourceTree = "<group>"; };
+		140A4E8518B909D3009AE87A /* BachStopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachStopwatch.h; sourceTree = "<group>"; };
+		140A4E8618B909D3009AE87A /* BachStopwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachStopwatch.m; sourceTree = "<group>"; };
 		142980CB18A1CF07002422C8 /* BachHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachHelper.h; sourceTree = "<group>"; };
 		142980CC18A1CF07002422C8 /* BachHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachHelper.m; sourceTree = "<group>"; };
 		1434610818A690F10072FE29 /* BachConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachConstants.h; sourceTree = "<group>"; };
@@ -399,6 +403,8 @@
 				1434610918A690F10072FE29 /* BachConstants.m */,
 				14ADFD0B18A83BF00068C129 /* BachRingBuffer.h */,
 				14ADFD0C18A83BF00068C129 /* BachRingBuffer.m */,
+				140A4E8518B909D3009AE87A /* BachStopwatch.h */,
+				140A4E8618B909D3009AE87A /* BachStopwatch.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -421,6 +427,7 @@
 			files = (
 				14012FE5189D8ED0008765B3 /* BachParserFactory.h in Headers */,
 				14012FCB189D65F9008765B3 /* BachFileSource.h in Headers */,
+				140A4E8718B909D3009AE87A /* BachStopwatch.h in Headers */,
 				1434610A18A690F10072FE29 /* BachConstants.h in Headers */,
 				14ADFD0D18A83BF00068C129 /* BachRingBuffer.h in Headers */,
 				142980CD18A1CF07002422C8 /* BachHelper.h in Headers */,
@@ -595,6 +602,7 @@
 				14012FCC189D65F9008765B3 /* BachFileSource.m in Sources */,
 				1434610B18A690F10072FE29 /* BachConstants.m in Sources */,
 				14012FDA189D7619008765B3 /* BachCoreAudioParser.m in Sources */,
+				140A4E8818B909D3009AE87A /* BachStopwatch.m in Sources */,
 				14012FEA189D91D9008765B3 /* BachSourceFactory.m in Sources */,
 				14012FEE189D9760008765B3 /* BachConverter.m in Sources */,
 				142980CE18A1CF07002422C8 /* BachHelper.m in Sources */,

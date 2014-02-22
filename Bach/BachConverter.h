@@ -40,5 +40,6 @@
 -(void) setupOutput:(BachOutput *)output;
 -(void) convert;
 -(BOOL) shouldBuffer;
+-(void) flush;
 
 @end

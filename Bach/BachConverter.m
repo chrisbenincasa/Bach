@@ -125,6 +125,12 @@
     return [_convertedBytes length] <= 0.5 * (_bufferSize) && ![input processing]; // TODO: Adjust this
 }
 
+-(void) flush {
+    dispatch_sync([BachBuffer input_queue], ^{
+        self.convertedBytes = [NSMutableData data];
+    });
+}
+
 static OSStatus fillConverterCallback(AudioConverterRef inConverter, UInt32 *ioNumberDataPackets, AudioBufferList *ioData, AudioStreamPacketDescription **outDataPacketDescription, void *inUserData) {
     
     BachConverter* converter = (__bridge BachConverter*) inUserData;

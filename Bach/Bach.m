@@ -28,8 +28,26 @@
 }
 
 -(void) playWithUrl:(NSURL *)url {
+    // If we're already playing, just reinit and flush the buffers
+    if (_state == Playing) {
+        dispatch_async([BachBuffer process_queue], ^{
+            [_input openUrl:url];
+            [_converter flush];
+            [_converter setInput:_input];
+            [_converter setOutput:_output];
+            [_output setAmountPlayed:0.0];
+            [self setState: Playing];
+            dispatch_source_merge_data([BachBuffer buffer_dispatch_source], 1);
+        });
+        return;
+    }
+    
     dispatch_async([BachBuffer process_queue], ^{
-        NSDate* date = [NSDate date];
+        
+#if __BACH_DEBUG
+        BachStopwatch* stopwatch = [[BachStopwatch alloc] init];
+        [stopwatch start];
+#endif
         // TODO mess with buffer size.
         // Big buffer = less reads when using CoreAudio
         // Small buffer = lower latency when seeking
@@ -41,43 +59,48 @@
 #endif
         }
         
-        double timePassed = [date timeIntervalSinceNow] * -1000;
-        NSLog(@"took %.2f to init input", timePassed);
+#if __BACH_DEBUG
+        NSLog(@"took %lu millis to init input", [stopwatch getElapsedMillis]);
         
-        date = [NSDate date];
-
+        [stopwatch reset];
+#endif
         _converter = [[BachConverter alloc] initWithBufferSize:(1024 * 128)];
         
         if (!_converter) {
 #if __BACH_DEBUG
             NSLog(@"unable to initialize converter");
 #endif
+            return;
         }
         
         [_converter setupInput:_input];
         
-        timePassed = [date timeIntervalSinceNow] * -1000;
-        NSLog(@"took %.2f to init converter with input", timePassed);
+#if __BACH_DEBUG
+        NSLog(@"took %lu to init converter with input", [stopwatch getElapsedMillis]);
         
+        [stopwatch reset];
+#endif
         
-        date = [NSDate date];
         _output = [[BachOutput alloc] initWithConverter:_converter];
         
         if (!_output) {
 #if __BACH_DEBUG
             NSLog(@"unabled to initialize output device");
 #endif
+            return;
         }
         
-        timePassed = [date timeIntervalSinceNow] * -1000;
-        NSLog(@"took %.2f to init output", timePassed);
+#if __BACH_DEBUG
+        NSLog(@"took %lu to init output", [stopwatch getElapsedMillis]);
         
-        date = [NSDate date];
+        [stopwatch reset];
+#endif
         
         [_converter setupOutput:_output];
         
-        timePassed = [date timeIntervalSinceNow] * -1000;
-        NSLog(@"took %.2f to init conveter with output", timePassed);
+#if __BACH_DEBUG
+        NSLog(@"took %lu to init converter with output", [stopwatch getElapsedMillis]);
+#endif
         
         [self setState: Playing];
         
@@ -105,6 +128,9 @@
 -(void) stop {
     if ([_output playing] && [_output processing]) {
         [_output stop];
+        self.output = nil;
+        self.input = nil;
+        self.converter = nil;
         [self setState: Stopped];
     }
 }
