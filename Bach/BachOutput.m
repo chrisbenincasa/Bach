@@ -176,7 +176,7 @@
     _amountPlayed += bytesRead;
     
     if ([_converter shouldBuffer]) {
-        dispatch_source_merge_data([BachBuffer buffer_dispatch_source], 1);
+        dispatch_source_merge_data([BachDispatch buffer_dispatch_source], 1);
     }
     
     return (int) bytesRead;

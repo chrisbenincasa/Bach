@@ -48,14 +48,14 @@
         }
         
         convertedAmount = [self convertBytes:_toConvertBuffer bytes:_readSize];
-        dispatch_sync([BachBuffer input_queue], ^{
+        dispatch_sync([BachDispatch input_queue], ^{
             [_convertedBytes appendBytes:_toConvertBuffer length: convertedAmount];
         });
     }
     
     if (![output processing]) {
         if ([_convertedBytes length] < _bufferSize) {
-            dispatch_source_merge_data([BachBuffer buffer_dispatch_source], 1);
+            dispatch_source_merge_data([BachDispatch buffer_dispatch_source], 1);
             return;
         }
         [output process];
@@ -126,7 +126,7 @@
 }
 
 -(void) flush {
-    dispatch_sync([BachBuffer input_queue], ^{
+    dispatch_sync([BachDispatch input_queue], ^{
         self.convertedBytes = [NSMutableData data];
     });
 }

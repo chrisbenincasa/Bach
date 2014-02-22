@@ -1,5 +1,5 @@
 //
-//  BachBuffer.h
+//  BachDispatch.h
 //  Bach
 //
 //  Created by Christian Benincasa on 2/1/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BachBuffer : NSObject
+@interface BachDispatch : NSObject
 
 + (dispatch_queue_t) input_queue;
 + (dispatch_queue_t) process_queue;

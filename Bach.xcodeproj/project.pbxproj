@@ -38,8 +38,8 @@
 		14012FD6189D6A99008765B3 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012FD5189D6A99008765B3 /* AudioUnit.framework */; };
 		14012FD9189D7619008765B3 /* BachCoreAudioParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FD7189D7619008765B3 /* BachCoreAudioParser.h */; };
 		14012FDA189D7619008765B3 /* BachCoreAudioParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FD8189D7619008765B3 /* BachCoreAudioParser.m */; };
-		14012FDE189D7711008765B3 /* BachBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FDC189D7711008765B3 /* BachBuffer.h */; };
-		14012FDF189D7711008765B3 /* BachBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FDD189D7711008765B3 /* BachBuffer.m */; };
+		14012FDE189D7711008765B3 /* BachDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FDC189D7711008765B3 /* BachDispatch.h */; };
+		14012FDF189D7711008765B3 /* BachDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FDD189D7711008765B3 /* BachDispatch.m */; };
 		14012FE1189D7C47008765B3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012FE0189D7C47008765B3 /* AudioToolbox.framework */; };
 		14012FE5189D8ED0008765B3 /* BachParserFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FE3189D8ED0008765B3 /* BachParserFactory.h */; };
 		14012FE6189D8ED0008765B3 /* BachParserFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FE4189D8ED0008765B3 /* BachParserFactory.m */; };
@@ -124,8 +124,8 @@
 		14012FD5189D6A99008765B3 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		14012FD7189D7619008765B3 /* BachCoreAudioParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachCoreAudioParser.h; sourceTree = "<group>"; };
 		14012FD8189D7619008765B3 /* BachCoreAudioParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachCoreAudioParser.m; sourceTree = "<group>"; };
-		14012FDC189D7711008765B3 /* BachBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachBuffer.h; sourceTree = "<group>"; };
-		14012FDD189D7711008765B3 /* BachBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachBuffer.m; sourceTree = "<group>"; };
+		14012FDC189D7711008765B3 /* BachDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachDispatch.h; sourceTree = "<group>"; };
+		14012FDD189D7711008765B3 /* BachDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachDispatch.m; sourceTree = "<group>"; };
 		14012FE0189D7C47008765B3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		14012FE2189D8DA8008765B3 /* BachParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BachParser.h; sourceTree = "<group>"; };
 		14012FE3189D8ED0008765B3 /* BachParserFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachParserFactory.h; sourceTree = "<group>"; };
@@ -388,8 +388,8 @@
 		14012FDB189D7680008765B3 /* Dispatch */ = {
 			isa = PBXGroup;
 			children = (
-				14012FDC189D7711008765B3 /* BachBuffer.h */,
-				14012FDD189D7711008765B3 /* BachBuffer.m */,
+				14012FDC189D7711008765B3 /* BachDispatch.h */,
+				14012FDD189D7711008765B3 /* BachDispatch.m */,
 			);
 			name = Dispatch;
 			sourceTree = "<group>";
@@ -437,7 +437,7 @@
 				14012FCF189D681B008765B3 /* BachInput.h in Headers */,
 				14012FD9189D7619008765B3 /* BachCoreAudioParser.h in Headers */,
 				14012FE9189D91D9008765B3 /* BachSourceFactory.h in Headers */,
-				14012FDE189D7711008765B3 /* BachBuffer.h in Headers */,
+				14012FDE189D7711008765B3 /* BachDispatch.h in Headers */,
 				14012FF1189EA6C0008765B3 /* BachParserType.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,7 +606,7 @@
 				14012FEA189D91D9008765B3 /* BachSourceFactory.m in Sources */,
 				14012FEE189D9760008765B3 /* BachConverter.m in Sources */,
 				142980CE18A1CF07002422C8 /* BachHelper.m in Sources */,
-				14012FDF189D7711008765B3 /* BachBuffer.m in Sources */,
+				14012FDF189D7711008765B3 /* BachDispatch.m in Sources */,
 				14012FD4189D6824008765B3 /* BachOutput.m in Sources */,
 				14ADFD0E18A83BF00068C129 /* BachRingBuffer.m in Sources */,
 				14DA1BB518A270DE00154B24 /* BachFlacParser.m in Sources */,

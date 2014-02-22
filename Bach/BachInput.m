@@ -91,7 +91,7 @@
         framesRead = [_parser readFrames:_inputBuf frames:(_readSize / _bytesPerFrame)];
         bufferLength = framesRead * _bytesPerFrame;
         
-        dispatch_sync([BachBuffer input_queue], ^{
+        dispatch_sync([BachDispatch input_queue], ^{
             [_buffer appendBytes:_inputBuf length:bufferLength];
         });
     }
@@ -106,7 +106,7 @@
 -(void) seek:(float) time flush:(BOOL) flush {
     _seekPosition = time * [[[_parser properties] objectForKey:[NSNumber numberWithInteger:SAMPLE_RATE]] floatValue];
     if (flush) {
-        dispatch_sync([BachBuffer input_queue], ^{
+        dispatch_sync([BachDispatch input_queue], ^{
             [_buffer setLength:0];
         });
         [_parser flush];

@@ -30,19 +30,19 @@
 -(void) playWithUrl:(NSURL *)url {
     // If we're already playing, just reinit and flush the buffers
     if (_state == Playing) {
-        dispatch_async([BachBuffer process_queue], ^{
+        dispatch_async([BachDispatch process_queue], ^{
             [_input openUrl:url];
             [_converter flush];
             [_converter setInput:_input];
             [_converter setOutput:_output];
             [_output setAmountPlayed:0.0];
             [self setState: Playing];
-            dispatch_source_merge_data([BachBuffer buffer_dispatch_source], 1);
+            dispatch_source_merge_data([BachDispatch buffer_dispatch_source], 1);
         });
         return;
     }
     
-    dispatch_async([BachBuffer process_queue], ^{
+    dispatch_async([BachDispatch process_queue], ^{
         
 #if __BACH_DEBUG
         BachStopwatch* stopwatch = [[BachStopwatch alloc] init];
@@ -104,8 +104,8 @@
         
         [self setState: Playing];
         
-        dispatch_source_merge_data([BachBuffer buffer_dispatch_source], 1);
-        dispatch_resume([BachBuffer buffer_dispatch_source]);
+        dispatch_source_merge_data([BachDispatch buffer_dispatch_source], 1);
+        dispatch_resume([BachDispatch buffer_dispatch_source]);
     });
 }
 
@@ -171,7 +171,7 @@
 #pragma mark private
 
 -(void) attachEventHandler {
-    dispatch_source_set_event_handler([BachBuffer buffer_dispatch_source], ^{
+    dispatch_source_set_event_handler([BachDispatch buffer_dispatch_source], ^{
         [_input decode];
         [_converter convert];
     });

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BachBuffer.h"
+#import "BachDispatch.h"
 #import "BachParser.h"
 #import "BachParserFactory.h"
 #import "BachParserPropertyKeys.h"

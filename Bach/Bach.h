@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
-#import "BachBuffer.h"
+#import "BachDispatch.h"
 #import "BachConstants.h"
 #import "BachConverter.h"
 #import "BachInput.h"

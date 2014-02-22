@@ -1,14 +1,14 @@
 //
-//  BachBuffer.m
+//  BachDispatch.m
 //  Bach
 //
 //  Created by Christian Benincasa on 2/1/14.
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
-#import "BachBuffer.h"
+#import "BachDispatch.h"
 
-@implementation BachBuffer
+@implementation BachDispatch
 
 +(dispatch_queue_t) input_queue {
     static dispatch_queue_t queue;
