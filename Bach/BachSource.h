@@ -19,10 +19,12 @@
 
 -(BachParserType) parserType;
 
+@required
 -(BOOL)open: (NSURL*) url;
 -(int)read:(void *)buffer amount:(int) amount;
--(BOOL) seek:(long)position startingPosition:(int)startPos;
+-(BOOL)seek:(long)position startingPosition:(int)startPos;
 -(long)tell;
 -(BOOL)endOfSource;
+-(void)close;
 
 @end

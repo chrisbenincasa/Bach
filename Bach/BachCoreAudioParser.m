@@ -26,6 +26,12 @@
     return extensions;
 }
 
+-(void) dealloc {
+    ExtAudioFileDispose(_extAudioFile);
+    AudioFileClose(_audioFile);
+    [source close];
+}
+
 -(NSDictionary*) properties {
     return [NSDictionary dictionaryWithObjectsAndKeys:
      [NSNumber numberWithFloat:_bitRate], [NSNumber numberWithInteger:BIT_RATE],
@@ -69,11 +75,11 @@
 -(void) seek:(float)position {
     OSStatus err;
     err = ExtAudioFileSeek(_extAudioFile, position);
-    if (!err) {
 #if BACH_DEBUG
+    if (!err) {
         NSLog(@"unable to seek to position");
-#endif
     }
+#endif
 }
 
 -(void) flush {
@@ -87,21 +93,27 @@
     err = AudioFileOpenWithCallbacks((__bridge void*) source, readAudioFile, NULL, getSizeProc, NULL, 0, &_audioFile);
     
     if (err != 0) {
-        NSLog(@"unable to open audio file. error code: %c", err);
+#if __BACH_DEBUG
+        [[BachHelper getInstance] printError:err withString:@"unable to open audio file. error code:"];
+#endif
         return NO;
     }
     
     err = ExtAudioFileWrapAudioFileID(_audioFile, NO, &_extAudioFile);
     
     if (err != 0) {
-        NSLog(@"unable to wrap audio file. error code: %c", err);
+#if __BACH_DEBUG
+        [[BachHelper getInstance] printError:err withString:@"unable to wrap audio file. error code:"];
+#endif
         return NO;
     }
     
     if([self initializeAudioFileInfo]) {
         return YES;
     } else {
+#if __BACH_DEBUG
         NSLog(@"unable to init audio file info.");
+#endif
         return NO;
     }
 }

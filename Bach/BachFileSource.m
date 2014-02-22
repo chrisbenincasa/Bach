@@ -46,4 +46,10 @@
     return ftell(_fd) == SEEK_END;
 }
 
+-(void) close {
+    if (_fd) {
+        fclose(_fd);
+    }
+}
+
 @end

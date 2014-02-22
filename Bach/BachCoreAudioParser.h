@@ -7,6 +7,7 @@
 //
 
 #import "BachBuffer.h"
+#import "BachHelper.h"
 #import "BachParser.h"
 
 #import <Foundation/Foundation.h>

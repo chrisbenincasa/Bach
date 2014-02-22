@@ -17,7 +17,15 @@
 @synthesize metadata;
 
 -(void) dealloc {
-    free(writeBuffer);
+    if (_decoder) {
+        FLAC__stream_decoder_finish(_decoder);
+        FLAC__stream_decoder_delete(_decoder);
+    }
+    if (writeBuffer) {
+        free(writeBuffer);
+    }
+    
+    [source close];
 }
 
 +(NSArray*) fileTypes {
@@ -122,6 +130,7 @@
 
 -(void) flush {
     bzero(writeBuffer, _writeBufferSize);
+    FLAC__stream_decoder_flush(_decoder);
 }
 
 static FLAC__StreamDecoderReadStatus FLACReadCallback(const FLAC__StreamDecoder* decoder, FLAC__byte buffer[], size_t* bytes, void* clientData) {
