@@ -97,7 +97,6 @@
             [self.input decode];
             [self.converter convert];
         }];
-        [[BachDispatch operation_queue] resume];
     }];
 }
 
