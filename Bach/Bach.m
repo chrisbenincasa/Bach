@@ -93,7 +93,7 @@
 #endif
         
         [self setState: Playing];
-        [[BachDispatch operation_queue] performBlockRepeatedly:^{
+        [[BachDispatch operation_queue] registerCallbackWithBlock:^{
             [self.input decode];
             [self.converter convert];
         }];

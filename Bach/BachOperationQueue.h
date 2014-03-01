@@ -14,7 +14,7 @@
 @property (nonatomic, copy) void (^callback)(void);
 
 -(void)resume;
--(void)performBlockRepeatedly:(void(^)(void))block;
+-(void)registerCallbackWithBlock:(void(^)(void))block;
 -(void)fireCallback;
 
 @end

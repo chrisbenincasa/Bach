@@ -24,7 +24,7 @@
     [self addOperationWithBlock:self.callback];
 }
 
--(void)performBlockRepeatedly:(void (^)(void))block {
+-(void)registerCallbackWithBlock:(void (^)(void))block {
     self.callback = block;
 }
 
