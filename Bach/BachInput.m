@@ -38,7 +38,8 @@
 }
 
 -(BOOL) openUrl:(NSURL *)url {
-    _source = [BachSourceFactory create:url];
+    
+    self.source = [BachSourceFactory create:url];
     
     if (!_source) {
 #if BACH_DEBUG
@@ -54,7 +55,7 @@
         return NO;
     }
     
-    _parser = [BachParserFactory create:[url pathExtension]];
+    self.parser = [BachParserFactory create:[url pathExtension]];
     
     if (!_parser) {
 #if BACH_DEBUG
@@ -74,6 +75,8 @@
     int channels = [[[_parser properties] objectForKey: [NSNumber numberWithInteger:CHANNELS]] intValue];
     _bytesPerFrame = (bitsPerChannel / 8) * channels;
     
+    [self setAtEnd:NO];
+    
     return YES;
 }
 
@@ -82,22 +85,26 @@
     int bufferLength = 0;
     int framesRead = 0;
     
-    while(processing && framesRead >= 0) {
+    do {
         if ([_buffer length] >= _bufferSize) {
-            processing = NO;
+            framesRead = 1;
             break;
         }
         
         framesRead = [_parser readFrames:_inputBuf frames:(_readSize / _bytesPerFrame)];
         bufferLength = framesRead * _bytesPerFrame;
-        
-        dispatch_sync([BachDispatch input_queue], ^{
+
+        [[BachDispatch blocking_queue] addOperationWithBlock:^{
             [_buffer appendBytes:_inputBuf length:bufferLength];
-        });
-    }
+        }];
+        [[BachDispatch blocking_queue] waitUntilAllOperationsAreFinished];
+    } while (framesRead > 0);
     
-    if (framesRead < 0) {
-        _atEnd = YES;
+    if (framesRead <= 0) {
+        [self setAtEnd:YES];
+        NSDictionary* stateChangeInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], kBachEndOfInputKey, nil];
+        NSNotification* stateChange = [NSNotification notificationWithName:kBachEndOfInputKey object:nil userInfo:stateChangeInfo];
+        [[NSNotificationCenter defaultCenter] postNotification:stateChange];
     }
     
     processing = NO;
@@ -106,9 +113,10 @@
 -(void) seek:(float) time flush:(BOOL) flush {
     _seekPosition = time * [[[_parser properties] objectForKey:[NSNumber numberWithInteger:SAMPLE_RATE]] floatValue];
     if (flush) {
-        dispatch_sync([BachDispatch input_queue], ^{
+        [[BachDispatch blocking_queue] addOperationWithBlock:^{
             [_buffer setLength:0];
-        });
+        }];
+        [[BachDispatch blocking_queue] waitUntilAllOperationsAreFinished];
         [_parser flush];
     }
     [_parser seek: _seekPosition];

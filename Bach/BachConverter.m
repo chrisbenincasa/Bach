@@ -42,20 +42,22 @@
 
 -(void) convert {
     int convertedAmount = 0;
-    while (convertedAmount >= 0) {
+    do {
         if ([_convertedBytes length] >= _bufferSize) {
             break;
         }
         
         convertedAmount = [self convertBytes:_toConvertBuffer bytes:_readSize];
-        dispatch_sync([BachDispatch input_queue], ^{
+        [[BachDispatch blocking_queue] addOperationWithBlock:^{
             [_convertedBytes appendBytes:_toConvertBuffer length: convertedAmount];
-        });
-    }
+        }];
+        [[BachDispatch blocking_queue] waitUntilAllOperationsAreFinished];
+        
+    } while (convertedAmount > 0);
     
     if (![output processing]) {
         if ([_convertedBytes length] < _bufferSize) {
-            dispatch_source_merge_data([BachDispatch buffer_dispatch_source], 1);
+            [[BachDispatch operation_queue] fireCallback];
             return;
         }
         [output process];
@@ -79,9 +81,9 @@
     
     if (err == kAudioConverterErr_InvalidInputSize)	{
         amountRead += [self convertBytes:buffer + amountRead bytes:nBytes - amountRead];
-    }
-    
-    if (err != 0) {
+    } else if (err == 100) {
+        return 0;
+    } else if (err != 0) {
         NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain
                                              code:err
                                          userInfo:nil];
@@ -126,9 +128,10 @@
 }
 
 -(void) flush {
-    dispatch_sync([BachDispatch input_queue], ^{
+    [[BachDispatch blocking_queue] addOperationWithBlock:^{
         self.convertedBytes = [NSMutableData data];
-    });
+    }];
+    [[BachDispatch blocking_queue] waitUntilAllOperationsAreFinished];
 }
 
 static OSStatus fillConverterCallback(AudioConverterRef inConverter, UInt32 *ioNumberDataPackets, AudioBufferList *ioData, AudioStreamPacketDescription **outDataPacketDescription, void *inUserData) {

@@ -14,8 +14,9 @@
     if (self = [super init]) {
         _volume = 100.0f;
         _error = nil;
+        _nextURL = [[NSURL alloc] init];
+        [[BachDispatch operation_queue] setMaxConcurrentOperationCount:1];
         [self setState: Stopped];
-        [self attachEventHandler];
     }
     
     return self;
@@ -28,21 +29,8 @@
 }
 
 -(void) playWithUrl:(NSURL *)url {
-    // If we're already playing, just reinit and flush the buffers
-    if (_state == Playing) {
-        dispatch_async([BachDispatch process_queue], ^{
-            [_input openUrl:url];
-            [_converter flush];
-            [_converter setInput:_input];
-            [_converter setOutput:_output];
-            [_output setAmountPlayed:0.0];
-            [self setState: Playing];
-            dispatch_source_merge_data([BachDispatch buffer_dispatch_source], 1);
-        });
-        return;
-    }
-    
-    dispatch_async([BachDispatch process_queue], ^{
+//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{}]
+    [[BachDispatch operation_queue] addOperationWithBlock:^{
         
 #if __BACH_DEBUG
         BachStopwatch* stopwatch = [[BachStopwatch alloc] init];
@@ -52,6 +40,8 @@
         // Big buffer = less reads when using CoreAudio
         // Small buffer = lower latency when seeking
         _input = [[BachInput alloc] initWithBufferSize:(1024 * 128)];
+        
+        [_input addObserver:self forKeyPath:@"atEnd" options:NSKeyValueObservingOptionNew context:NULL];
         
         if (![_input openUrl:url]) {
 #if __BACH_DEBUG
@@ -103,10 +93,30 @@
 #endif
         
         [self setState: Playing];
+        [[BachDispatch operation_queue] performBlockRepeatedly:^{
+            [self.input decode];
+            [self.converter convert];
+        }];
+        [[BachDispatch operation_queue] resume];
+    }];
+}
+
+-(void) playNextUrl:(NSURL *)url {
+    if (!url) {
+        return;
+    }
+    
+    [[BachDispatch operation_queue] cancelAllOperations];
+    [[BachDispatch operation_queue] addOperationWithBlock:^{
+        if (![_input openUrl:url]) {
+            [self stop];
+        }
         
-        dispatch_source_merge_data([BachDispatch buffer_dispatch_source], 1);
-        dispatch_resume([BachDispatch buffer_dispatch_source]);
-    });
+        [_converter setInput:_input];
+        [_converter setOutput:_output];
+        [_output setAmountPlayed:0.0];
+        [self setState:Playing];
+    }];
 }
 
 #pragma mark Player Operations
@@ -170,11 +180,23 @@
 
 #pragma mark private
 
--(void) attachEventHandler {
-    dispatch_source_set_event_handler([BachDispatch buffer_dispatch_source], ^{
-        [_input decode];
-        [_converter convert];
-    });
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (!_delegate)
+        return;
+    
+    if ([keyPath isEqualToString:@"atEnd"]) {
+        BOOL atEnd = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
+        if (atEnd) {
+            _nextURL = [_delegate getNextUrl];
+            if (_nextURL) {
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    [self playNextUrl:_nextURL];
+                }];
+            } else {
+                [self stop];
+            }
+        }
+    }
 }
 
 @end

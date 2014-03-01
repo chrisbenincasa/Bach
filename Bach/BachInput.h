@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "BachConstants.h"
 #import "BachDispatch.h"
 #import "BachParser.h"
 #import "BachParserFactory.h"
@@ -29,7 +30,7 @@
 @property(assign, nonatomic) int bytesPerPacket;
 
 @property(assign, nonatomic, readonly) BOOL processing;
-@property(assign, nonatomic, readonly) BOOL atEnd;
+@property(assign, nonatomic) BOOL atEnd;
 @property(assign, nonatomic) BOOL shouldSeek;
 @property(assign, nonatomic) float seekPosition;
 

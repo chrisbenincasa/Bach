@@ -138,7 +138,7 @@
     */
     
     // TODO: doing this synchroniously seems to be bottleneck...investigate more
-    dispatch_async(dispatch_get_main_queue(), ^{
+    [[BachDispatch operation_queue] addOperationWithBlock:^{
         SInt64 totalSize;
         UInt32 size = sizeof(totalSize);
         OSStatus err = ExtAudioFileGetProperty(_extAudioFile, kExtAudioFileProperty_FileLengthFrames, &size, &totalSize);
@@ -148,7 +148,7 @@
         }
         
         _totalFrames = totalSize;
-    });
+    }];
 
     AudioFileID audioFile;
     size = sizeof(audioFile);

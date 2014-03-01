@@ -8,3 +8,4 @@
 
 // Notification Keys
 extern NSString* const kBachStateKey;
+extern NSString* const kBachEndOfInputKey;

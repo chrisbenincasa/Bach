@@ -30,20 +30,20 @@
     isProcessing = YES;
     isPlaying = YES;
     __block OSStatus err;
-    dispatch_async(dispatch_get_main_queue(), ^{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         err = AudioOutputUnitStart(_output);
         if (err != 0) {
             NSLog(@"error playing shit");
         }
-    });
+    }];
 }
 
 -(void) play {
     isProcessing = YES;
     isPlaying = YES;
-    dispatch_async(dispatch_get_main_queue(), ^{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
         AudioOutputUnitStart(_output);
-    });
+    }];
 }
 
 -(void) pause {
@@ -168,7 +168,7 @@
 
 -(int)readData:(void*)to amount:(unsigned int) nBytes {
     if (!_converter) {
-        // TODO throw
+        // TODO: throw
         return 0;
     }
     
@@ -176,7 +176,7 @@
     _amountPlayed += bytesRead;
     
     if ([_converter shouldBuffer]) {
-        dispatch_source_merge_data([BachDispatch buffer_dispatch_source], 1);
+        [[BachDispatch operation_queue] fireCallback];
     }
     
     return (int) bytesRead;

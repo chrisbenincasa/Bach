@@ -21,10 +21,11 @@
 
 -(long) moveBytes:(unsigned int)nBytes to:(void*)to from:(NSMutableData*) from {
     long bytesToMove = (nBytes < [from length]) ? nBytes : [from length];
-    dispatch_sync([BachDispatch input_queue], ^{
+    [[BachDispatch blocking_queue] addOperationWithBlock:^{
         memcpy(to, [from bytes], bytesToMove);
         [from replaceBytesInRange:NSMakeRange(0, bytesToMove) withBytes:NULL length:0];
-    });
+    }];
+    [[BachDispatch blocking_queue] waitUntilAllOperationsAreFinished];
     
     return bytesToMove;
 }
@@ -35,7 +36,6 @@
         char* errorString = formatError(str, error);
         NSLog(@"%s", errorString);
         free(str);
-        free(errorString);
     }
 }
 
@@ -45,7 +45,6 @@
         char* errorString = formatError(str, error);
         NSLog(@"%@ %s", description, errorString);
         free(str);
-        free(errorString);
     }
 }
 

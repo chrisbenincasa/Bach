@@ -25,21 +25,26 @@ typedef NS_ENUM(NSInteger, BachState) {
     Error
 };
 
+@protocol BachDelegate;
+
 @interface Bach : NSObject
 
 @property(strong, nonatomic) NSError *error;
 
+@property(strong, nonatomic) id<BachDelegate> delegate;
 @property(strong, nonatomic) BachInput* input;
 @property(strong, nonatomic) BachConverter* converter;
 @property(strong, nonatomic) BachOutput* output;
 
 @property(assign, nonatomic) float volume;
 @property(assign, nonatomic) BachState state;
+@property(strong, nonatomic) NSURL* nextURL;
 
 #pragma mark public
 
 -(void) playWithString:(NSString*) url;
 -(void) playWithUrl:(NSURL*) url;
+-(void) playNextUrl:(NSURL*) url;
 -(void) pause;
 -(void) resume;
 -(void) stop;
@@ -51,6 +56,13 @@ typedef NS_ENUM(NSInteger, BachState) {
 
 #pragma mark private
 
--(void) attachEventHandler;
+@end
+
+// BachDelegate
+
+@protocol BachDelegate <NSObject>
+
+@required
+-(NSURL*) getNextUrl;
 
 @end

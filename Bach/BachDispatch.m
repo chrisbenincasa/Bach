@@ -10,34 +10,26 @@
 
 @implementation BachDispatch
 
-+(dispatch_queue_t) input_queue {
-    static dispatch_queue_t queue;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        queue = dispatch_queue_create("bach.input.process", DISPATCH_QUEUE_SERIAL);
++(BachOperationQueue*) blocking_queue {
+    static BachOperationQueue* blockingQueue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        blockingQueue = [[BachOperationQueue alloc] init];
+        [blockingQueue setMaxConcurrentOperationCount:1];
     });
     
-    return queue;
+    return blockingQueue;
 }
 
-+(dispatch_queue_t) process_queue {
-    static dispatch_queue_t queue;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        queue = dispatch_queue_create("bach.process", DISPATCH_QUEUE_SERIAL);
++(BachOperationQueue*) operation_queue {
+    static BachOperationQueue* operationQueue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        operationQueue = [[BachOperationQueue alloc] init];
+        [operationQueue setMaxConcurrentOperationCount:1];
     });
     
-    return queue;
-}
-
-+(dispatch_source_t) buffer_dispatch_source {
-    static dispatch_source_t source;
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        source = dispatch_source_create(DISPATCH_SOURCE_TYPE_DATA_ADD, 0, 0, [self process_queue]);
-    });
-    
-    return source;
+    return operationQueue;
 }
 
 @end

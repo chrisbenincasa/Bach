@@ -60,8 +60,12 @@
 		1434611F18A82EC20072FE29 /* COBach.m in Sources */ = {isa = PBXBuildFile; fileRef = 1434611E18A82EC20072FE29 /* COBach.m */; };
 		14ADFD0D18A83BF00068C129 /* BachRingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 14ADFD0B18A83BF00068C129 /* BachRingBuffer.h */; };
 		14ADFD0E18A83BF00068C129 /* BachRingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ADFD0C18A83BF00068C129 /* BachRingBuffer.m */; };
+		14D1486718C26917008460E1 /* BachOperationQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 14D1486518C26917008460E1 /* BachOperationQueue.h */; };
+		14D1486818C26917008460E1 /* BachOperationQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D1486618C26917008460E1 /* BachOperationQueue.m */; };
 		14DA1BB418A270DE00154B24 /* BachFlacParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 14DA1BB218A270DE00154B24 /* BachFlacParser.h */; };
 		14DA1BB518A270DE00154B24 /* BachFlacParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DA1BB318A270DE00154B24 /* BachFlacParser.m */; };
+		14DDC32018BA4F5000A9440B /* COPlaylistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DDC31F18BA4F5000A9440B /* COPlaylistManager.m */; };
+		14DDC32418BAA98100A9440B /* COEphemeralPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DDC32318BAA98100A9440B /* COEphemeralPlaylist.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,8 +153,14 @@
 		1434611E18A82EC20072FE29 /* COBach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COBach.m; sourceTree = "<group>"; };
 		14ADFD0B18A83BF00068C129 /* BachRingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachRingBuffer.h; sourceTree = "<group>"; };
 		14ADFD0C18A83BF00068C129 /* BachRingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachRingBuffer.m; sourceTree = "<group>"; };
+		14D1486518C26917008460E1 /* BachOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachOperationQueue.h; sourceTree = "<group>"; };
+		14D1486618C26917008460E1 /* BachOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachOperationQueue.m; sourceTree = "<group>"; };
 		14DA1BB218A270DE00154B24 /* BachFlacParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachFlacParser.h; sourceTree = "<group>"; };
 		14DA1BB318A270DE00154B24 /* BachFlacParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachFlacParser.m; sourceTree = "<group>"; };
+		14DDC31E18BA4F5000A9440B /* COPlaylistManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COPlaylistManager.h; sourceTree = "<group>"; };
+		14DDC31F18BA4F5000A9440B /* COPlaylistManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COPlaylistManager.m; sourceTree = "<group>"; };
+		14DDC32218BAA98100A9440B /* COEphemeralPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = COEphemeralPlaylist.h; sourceTree = "<group>"; };
+		14DDC32318BAA98100A9440B /* COEphemeralPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = COEphemeralPlaylist.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,11 +308,11 @@
 				1434611C18A82E3D0072FE29 /* Classes */,
 				14012FA4189D5F72008765B3 /* COAppDelegate.h */,
 				14012FA5189D5F72008765B3 /* COAppDelegate.m */,
+				1434611918A829F40072FE29 /* COMainViewController.h */,
+				1434611A18A829F40072FE29 /* COMainViewController.m */,
 				14012FA7189D5F72008765B3 /* MainMenu.xib */,
 				14012FAA189D5F72008765B3 /* Images.xcassets */,
 				14012F99189D5F72008765B3 /* Supporting Files */,
-				1434611918A829F40072FE29 /* COMainViewController.h */,
-				1434611A18A829F40072FE29 /* COMainViewController.m */,
 			);
 			path = Concerto;
 			sourceTree = "<group>";
@@ -390,6 +400,8 @@
 			children = (
 				14012FDC189D7711008765B3 /* BachDispatch.h */,
 				14012FDD189D7711008765B3 /* BachDispatch.m */,
+				14D1486518C26917008460E1 /* BachOperationQueue.h */,
+				14D1486618C26917008460E1 /* BachOperationQueue.m */,
 			);
 			name = Dispatch;
 			sourceTree = "<group>";
@@ -414,6 +426,10 @@
 			children = (
 				1434611D18A82EC20072FE29 /* COBach.h */,
 				1434611E18A82EC20072FE29 /* COBach.m */,
+				14DDC31E18BA4F5000A9440B /* COPlaylistManager.h */,
+				14DDC31F18BA4F5000A9440B /* COPlaylistManager.m */,
+				14DDC32218BAA98100A9440B /* COEphemeralPlaylist.h */,
+				14DDC32318BAA98100A9440B /* COEphemeralPlaylist.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -432,6 +448,7 @@
 				14ADFD0D18A83BF00068C129 /* BachRingBuffer.h in Headers */,
 				142980CD18A1CF07002422C8 /* BachHelper.h in Headers */,
 				14DA1BB418A270DE00154B24 /* BachFlacParser.h in Headers */,
+				14D1486718C26917008460E1 /* BachOperationQueue.h in Headers */,
 				14012FD3189D6824008765B3 /* BachOutput.h in Headers */,
 				14012FED189D9760008765B3 /* BachConverter.h in Headers */,
 				14012FCF189D681B008765B3 /* BachInput.h in Headers */,
@@ -599,6 +616,7 @@
 			files = (
 				14012FD0189D681B008765B3 /* BachInput.m in Sources */,
 				14012FE6189D8ED0008765B3 /* BachParserFactory.m in Sources */,
+				14D1486818C26917008460E1 /* BachOperationQueue.m in Sources */,
 				14012FCC189D65F9008765B3 /* BachFileSource.m in Sources */,
 				1434610B18A690F10072FE29 /* BachConstants.m in Sources */,
 				14012FDA189D7619008765B3 /* BachCoreAudioParser.m in Sources */,
@@ -629,7 +647,9 @@
 				14012FA6189D5F72008765B3 /* COAppDelegate.m in Sources */,
 				14012F9F189D5F72008765B3 /* main.m in Sources */,
 				1434611B18A829F40072FE29 /* COMainViewController.m in Sources */,
+				14DDC32018BA4F5000A9440B /* COPlaylistManager.m in Sources */,
 				1434611F18A82EC20072FE29 /* COBach.m in Sources */,
+				14DDC32418BAA98100A9440B /* COEphemeralPlaylist.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

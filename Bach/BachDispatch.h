@@ -6,12 +6,13 @@
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
+#import "BachOperationQueue.h"
+
 #import <Foundation/Foundation.h>
 
 @interface BachDispatch : NSObject
 
-+ (dispatch_queue_t) input_queue;
-+ (dispatch_queue_t) process_queue;
-+ (dispatch_source_t) buffer_dispatch_source;
++(BachOperationQueue*) operation_queue;
++(BachOperationQueue*) blocking_queue;
 
 @end

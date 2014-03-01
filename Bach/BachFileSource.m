@@ -17,6 +17,10 @@
     return CoreAudio;
 }
 
+-(void) dealloc {
+    [self close];
+}
+
 -(BOOL) open:(NSURL *)newUrl {
 	[self setUrl:newUrl];
 	_fd = fopen([[self.url path] UTF8String], "rb");
