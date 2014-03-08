@@ -5,8 +5,8 @@
 //
 
 #ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-    #import "BachConstants.h"
+#import <Cocoa/Cocoa.h>
+#import "BachConstants.h"
 #endif
 
 #define __BACH_DEBUG 1

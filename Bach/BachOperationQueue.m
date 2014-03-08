@@ -10,14 +10,26 @@
 
 @implementation BachOperationQueue
 
+-(id)init {
+    if (self = [super init]) {
+        self.resumed = NO;
+    }
+    
+    return self;
+}
+
+-(void)resume {
+    self.resumed = YES;
+    
+    [self addOperationWithBlock:self.callback];
+}
+
 -(void)registerCallbackWithBlock:(void (^)(void))block {
     self.callback = block;
 }
 
 -(void)fireCallback {
-    if (self.callback) {
-        [self addOperationWithBlock:self.callback];
-    }
+    [self addOperationWithBlock:self.callback];
 }
 
 @end

@@ -10,8 +10,10 @@
 
 @interface BachOperationQueue : NSOperationQueue
 
+@property (assign) BOOL resumed;
 @property (nonatomic, copy) void (^callback)(void);
 
+-(void)resume;
 -(void)registerCallbackWithBlock:(void(^)(void))block;
 -(void)fireCallback;
 

@@ -6,16 +6,11 @@
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
-#import "BachDispatch.h"
-#import "BachConverter.h"
-#import "BachInput.h"
-#import "BachOutput.h"
-
-#if __BACH_DEBUG
-#import "BachStopwatch.h"
-#endif
-
 #import <Foundation/Foundation.h>
+
+@class BachConverter;
+@class BachInput;
+@class BachOutput;
 
 typedef NS_ENUM(NSInteger, BachState) {
     Playing,

@@ -8,6 +8,15 @@
 
 #import "Bach.h"
 
+#import "BachDispatch.h"
+#import "BachConverter.h"
+#import "BachInput.h"
+#import "BachOutput.h"
+
+#if __BACH_DEBUG
+#import "BachStopwatch.h"
+#endif
+
 @implementation Bach
 
 -(id) init {
@@ -29,7 +38,7 @@
 }
 
 -(void) playWithUrl:(NSURL *)url {
-//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{}]
+    //    [[NSOperationQueue mainQueue] addOperationWithBlock:^{}]
     [[BachDispatch operation_queue] addOperationWithBlock:^{
         
 #if __BACH_DEBUG
@@ -97,6 +106,7 @@
             [self.input decode];
             [self.converter convert];
         }];
+        [[BachDispatch operation_queue] resume];
     }];
 }
 
