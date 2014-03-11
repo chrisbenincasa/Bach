@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		149190AF18CB6F7A004FFC8F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F5D189D586E008765B3 /* Cocoa.framework */; };
 		149190D218CB6F9E004FFC8F /* BachHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 142980CB18A1CF07002422C8 /* BachHelper.h */; };
-		149190D418CB6F9E004FFC8F /* BachConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 1434610818A690F10072FE29 /* BachConstants.h */; };
+		149190D418CB6F9E004FFC8F /* BachConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 1434610818A690F10072FE29 /* BachConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		149190D618CB6F9E004FFC8F /* BachRingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 14ADFD0B18A83BF00068C129 /* BachRingBuffer.h */; };
 		149190D818CB6F9E004FFC8F /* BachStopwatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 140A4E8518B909D3009AE87A /* BachStopwatch.h */; };
 		149190DA18CB6F9E004FFC8F /* BachDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FDC189D7711008765B3 /* BachDispatch.h */; };
@@ -20,7 +19,7 @@
 		149190E318CB6F9E004FFC8F /* BachParserFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FE3189D8ED0008765B3 /* BachParserFactory.h */; };
 		149190E518CB6F9E004FFC8F /* BachParserType.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FEF189EA6C0008765B3 /* BachParserType.h */; };
 		149190E618CB6F9E004FFC8F /* BachParserPropertyKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FF4189EAAB9008765B3 /* BachParserPropertyKeys.h */; };
-		149190E718CB6F9E004FFC8F /* BachFlacParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 14DA1BB218A270DE00154B24 /* BachFlacParser.h */; };
+		149190E718CB6F9E004FFC8F /* BachFLACParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 14DA1BB218A270DE00154B24 /* BachFLACParser.h */; };
 		149190E918CB6F9E004FFC8F /* BachOutput.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FD1189D6824008765B3 /* BachOutput.h */; };
 		149190EB18CB6F9E004FFC8F /* BachSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FC8189D65D6008765B3 /* BachSource.h */; };
 		149190EC18CB6F9E004FFC8F /* BachFileSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 14012FC9189D65F9008765B3 /* BachFileSource.h */; };
@@ -37,7 +36,7 @@
 		1491912C18CB7265004FFC8F /* BachConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FEC189D9760008765B3 /* BachConverter.m */; };
 		1491912D18CB7265004FFC8F /* BachCoreAudioParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FD8189D7619008765B3 /* BachCoreAudioParser.m */; };
 		1491912E18CB7265004FFC8F /* BachParserFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FE4189D8ED0008765B3 /* BachParserFactory.m */; };
-		1491912F18CB7265004FFC8F /* BachFlacParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DA1BB318A270DE00154B24 /* BachFlacParser.m */; };
+		1491912F18CB7265004FFC8F /* BachFLACParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DA1BB318A270DE00154B24 /* BachFLACParser.m */; };
 		1491913018CB7265004FFC8F /* BachOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FD2189D6824008765B3 /* BachOutput.m */; };
 		1491913118CB7265004FFC8F /* BachFileSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FCA189D65F9008765B3 /* BachFileSource.m */; };
 		1491913218CB7265004FFC8F /* BachInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FCE189D681B008765B3 /* BachInput.m */; };
@@ -45,6 +44,15 @@
 		1491913418CB72A0004FFC8F /* FLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F90189D5BBD008765B3 /* FLAC.framework */; };
 		1491913518CB72A9004FFC8F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012FE0189D7C47008765B3 /* AudioToolbox.framework */; };
 		1491913618CB72A9004FFC8F /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012FD5189D6A99008765B3 /* AudioUnit.framework */; };
+		1494332018CE84B800F3F315 /* BachCoreAudioMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 1494331E18CE84B800F3F315 /* BachCoreAudioMetadata.h */; };
+		1494332118CE84B800F3F315 /* BachCoreAudioMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 1494331F18CE84B800F3F315 /* BachCoreAudioMetadata.m */; };
+		1494332418CE84C300F3F315 /* BachFLACMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 1494332218CE84C300F3F315 /* BachFLACMetadata.h */; };
+		1494332518CE84C300F3F315 /* BachFLACMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 1494332318CE84C300F3F315 /* BachFLACMetadata.m */; };
+		1494332618CE857600F3F315 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1434611118A7D3F60072FE29 /* AVFoundation.framework */; };
+		1494332918CF6F9600F3F315 /* BachFileTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 1494332718CF6F9600F3F315 /* BachFileTypes.h */; };
+		1494332A18CF6F9600F3F315 /* BachFileTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 1494332818CF6F9600F3F315 /* BachFileTypes.m */; };
+		1494332C18CF709A00F3F315 /* BachMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 1494332B18CF709A00F3F315 /* BachMetadata.m */; };
+		1494332D18CF713B00F3F315 /* BachMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 1494331D18CE84AB00F3F315 /* BachMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,13 +98,21 @@
 		1491912118CB7078004FFC8F /* Bach.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bach.h; sourceTree = "<group>"; };
 		1491912218CB7078004FFC8F /* Bach.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bach.m; sourceTree = "<group>"; };
 		1491912518CB7124004FFC8F /* Bach-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bach-Prefix.pch"; sourceTree = "<group>"; };
+		1494331D18CE84AB00F3F315 /* BachMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BachMetadata.h; sourceTree = "<group>"; };
+		1494331E18CE84B800F3F315 /* BachCoreAudioMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachCoreAudioMetadata.h; sourceTree = "<group>"; };
+		1494331F18CE84B800F3F315 /* BachCoreAudioMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachCoreAudioMetadata.m; sourceTree = "<group>"; };
+		1494332218CE84C300F3F315 /* BachFLACMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachFLACMetadata.h; sourceTree = "<group>"; };
+		1494332318CE84C300F3F315 /* BachFLACMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachFLACMetadata.m; sourceTree = "<group>"; };
+		1494332718CF6F9600F3F315 /* BachFileTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachFileTypes.h; sourceTree = "<group>"; };
+		1494332818CF6F9600F3F315 /* BachFileTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachFileTypes.m; sourceTree = "<group>"; };
+		1494332B18CF709A00F3F315 /* BachMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachMetadata.m; sourceTree = "<group>"; };
 		14ADFD0B18A83BF00068C129 /* BachRingBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachRingBuffer.h; sourceTree = "<group>"; };
 		14ADFD0C18A83BF00068C129 /* BachRingBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachRingBuffer.m; sourceTree = "<group>"; };
 		14D1486518C26917008460E1 /* BachOperationQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachOperationQueue.h; sourceTree = "<group>"; };
 		14D1486618C26917008460E1 /* BachOperationQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachOperationQueue.m; sourceTree = "<group>"; };
 		14D1486918C293D3008460E1 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		14DA1BB218A270DE00154B24 /* BachFlacParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachFlacParser.h; sourceTree = "<group>"; };
-		14DA1BB318A270DE00154B24 /* BachFlacParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachFlacParser.m; sourceTree = "<group>"; };
+		14DA1BB218A270DE00154B24 /* BachFLACParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachFLACParser.h; sourceTree = "<group>"; };
+		14DA1BB318A270DE00154B24 /* BachFLACParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachFLACParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,10 +120,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1494332618CE857600F3F315 /* AVFoundation.framework in Frameworks */,
 				1491913518CB72A9004FFC8F /* AudioToolbox.framework in Frameworks */,
 				1491913618CB72A9004FFC8F /* AudioUnit.framework in Frameworks */,
 				1491913418CB72A0004FFC8F /* FLAC.framework in Frameworks */,
-				149190AF18CB6F7A004FFC8F /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +178,7 @@
 		14012F63189D586E008765B3 /* Bach */ = {
 			isa = PBXGroup;
 			children = (
+				1494331C18CE83BC00F3F315 /* Metadata */,
 				1434610F18A694850072FE29 /* Helpers */,
 				14012FDB189D7680008765B3 /* Dispatch */,
 				14012FC7189D63B1008765B3 /* Converter */,
@@ -216,8 +233,8 @@
 				14012FE4189D8ED0008765B3 /* BachParserFactory.m */,
 				14012FEF189EA6C0008765B3 /* BachParserType.h */,
 				14012FF4189EAAB9008765B3 /* BachParserPropertyKeys.h */,
-				14DA1BB218A270DE00154B24 /* BachFlacParser.h */,
-				14DA1BB318A270DE00154B24 /* BachFlacParser.m */,
+				14DA1BB218A270DE00154B24 /* BachFLACParser.h */,
+				14DA1BB318A270DE00154B24 /* BachFLACParser.m */,
 			);
 			name = Parser;
 			sourceTree = "<group>";
@@ -253,8 +270,23 @@
 				14ADFD0C18A83BF00068C129 /* BachRingBuffer.m */,
 				140A4E8518B909D3009AE87A /* BachStopwatch.h */,
 				140A4E8618B909D3009AE87A /* BachStopwatch.m */,
+				1494332718CF6F9600F3F315 /* BachFileTypes.h */,
+				1494332818CF6F9600F3F315 /* BachFileTypes.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		1494331C18CE83BC00F3F315 /* Metadata */ = {
+			isa = PBXGroup;
+			children = (
+				1494331D18CE84AB00F3F315 /* BachMetadata.h */,
+				1494332B18CF709A00F3F315 /* BachMetadata.m */,
+				1494331E18CE84B800F3F315 /* BachCoreAudioMetadata.h */,
+				1494331F18CE84B800F3F315 /* BachCoreAudioMetadata.m */,
+				1494332218CE84C300F3F315 /* BachFLACMetadata.h */,
+				1494332318CE84C300F3F315 /* BachFLACMetadata.m */,
+			);
+			name = Metadata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,10 +297,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1491912318CB7078004FFC8F /* Bach.h in Headers */,
-				149190D218CB6F9E004FFC8F /* BachHelper.h in Headers */,
+				1494332418CE84C300F3F315 /* BachFLACMetadata.h in Headers */,
+				1494332D18CF713B00F3F315 /* BachMetadata.h in Headers */,
 				149190D418CB6F9E004FFC8F /* BachConstants.h in Headers */,
+				149190D218CB6F9E004FFC8F /* BachHelper.h in Headers */,
 				149190D618CB6F9E004FFC8F /* BachRingBuffer.h in Headers */,
 				149190D818CB6F9E004FFC8F /* BachStopwatch.h in Headers */,
+				1494332918CF6F9600F3F315 /* BachFileTypes.h in Headers */,
 				149190DA18CB6F9E004FFC8F /* BachDispatch.h in Headers */,
 				149190DC18CB6F9E004FFC8F /* BachOperationQueue.h in Headers */,
 				149190DE18CB6F9E004FFC8F /* BachConverter.h in Headers */,
@@ -277,8 +312,9 @@
 				149190E318CB6F9E004FFC8F /* BachParserFactory.h in Headers */,
 				149190E518CB6F9E004FFC8F /* BachParserType.h in Headers */,
 				149190E618CB6F9E004FFC8F /* BachParserPropertyKeys.h in Headers */,
-				149190E718CB6F9E004FFC8F /* BachFlacParser.h in Headers */,
+				149190E718CB6F9E004FFC8F /* BachFLACParser.h in Headers */,
 				149190E918CB6F9E004FFC8F /* BachOutput.h in Headers */,
+				1494332018CE84B800F3F315 /* BachCoreAudioMetadata.h in Headers */,
 				149190EB18CB6F9E004FFC8F /* BachSource.h in Headers */,
 				149190EC18CB6F9E004FFC8F /* BachFileSource.h in Headers */,
 				149190EE18CB6F9E004FFC8F /* BachInput.h in Headers */,
@@ -353,14 +389,18 @@
 				1491912718CB7265004FFC8F /* BachConstants.m in Sources */,
 				1491912818CB7265004FFC8F /* BachRingBuffer.m in Sources */,
 				1491912918CB7265004FFC8F /* BachStopwatch.m in Sources */,
+				1494332C18CF709A00F3F315 /* BachMetadata.m in Sources */,
+				1494332518CE84C300F3F315 /* BachFLACMetadata.m in Sources */,
 				1491912A18CB7265004FFC8F /* BachDispatch.m in Sources */,
 				1491912B18CB7265004FFC8F /* BachOperationQueue.m in Sources */,
 				1491912C18CB7265004FFC8F /* BachConverter.m in Sources */,
 				1491912D18CB7265004FFC8F /* BachCoreAudioParser.m in Sources */,
 				1491912E18CB7265004FFC8F /* BachParserFactory.m in Sources */,
-				1491912F18CB7265004FFC8F /* BachFlacParser.m in Sources */,
+				1491912F18CB7265004FFC8F /* BachFLACParser.m in Sources */,
+				1494332A18CF6F9600F3F315 /* BachFileTypes.m in Sources */,
 				1491913018CB7265004FFC8F /* BachOutput.m in Sources */,
 				1491913118CB7265004FFC8F /* BachFileSource.m in Sources */,
+				1494332118CE84B800F3F315 /* BachCoreAudioMetadata.m in Sources */,
 				1491913218CB7265004FFC8F /* BachInput.m in Sources */,
 				1491913318CB7265004FFC8F /* BachSourceFactory.m in Sources */,
 				1491912418CB7078004FFC8F /* Bach.m in Sources */,
@@ -444,6 +484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -453,10 +494,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bach/Bach-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "__BACH_DEBUG=1";
 				INFOPLIST_FILE = "Bach/Bach-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
@@ -467,6 +505,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (

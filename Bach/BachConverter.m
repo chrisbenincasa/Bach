@@ -94,13 +94,13 @@
     return amountRead;
 }
 
--(void) setupInput:(BachInput *) input {
-    self.input = input;
+-(void) setupInput:(BachInput *)bachIn {
+    self.input = bachIn;
     _inputInfo = [[self input] format];
 }
 
--(void) setupOutput:(BachOutput *) output {
-    self.output = output;
+-(void) setupOutput:(BachOutput *)bachOut {
+    self.output = bachOut;
     [self.output setSampleRate:_inputInfo.mSampleRate];
     _outputInfo = [[self output] format];
     

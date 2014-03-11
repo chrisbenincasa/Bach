@@ -7,5 +7,5 @@
 //
 
 // Notification Keys
-extern NSString* const kBachStateKey;
-extern NSString* const kBachEndOfInputKey;
+static NSString* kBachStateKey = @"bach.player.state";
+static NSString* kBachEndOfInputKey = @"bach.player.endOfInput";

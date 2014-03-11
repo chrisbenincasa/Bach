@@ -17,6 +17,6 @@
 -(long) moveBytes:(unsigned int)nBytes to:(void*) to from:(NSMutableData*) from;
 -(void) printError:(OSStatus) error;
 -(void) printError:(OSStatus) error withString:(NSString*) description;
-static char *formatError(char *str, OSStatus error);
+static char* formatError(char *str, OSStatus error);
 
 @end

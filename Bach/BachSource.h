@@ -17,11 +17,9 @@
 @property(strong, nonatomic) NSURL* url;
 @property(assign, nonatomic) long size;
 
--(BachParserType) parserType;
-
 @required
 -(BOOL)open: (NSURL*) url;
--(int)read:(void *)buffer amount:(int) amount;
+-(unsigned long)read:(void *)buffer amount:(unsigned long)amount;
 -(BOOL)seek:(long)position startingPosition:(int)startPos;
 -(long)tell;
 -(BOOL)endOfSource;

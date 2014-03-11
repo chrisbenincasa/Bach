@@ -1,14 +1,15 @@
 //
-//  BachFlacParser.m
+//  BachFLACParser.m
 //  Bach
 //
 //  Created by Christian Benincasa on 2/5/14.
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
-#import "BachFlacParser.h"
+#import "BachFLACMetadata.h"
+#import "BachFLACParser.h"
 
-@implementation BachFlacParser
+@implementation BachFLACParser
 
 @synthesize writeBuffer;
 @synthesize description;
@@ -26,10 +27,6 @@
     }
     
     [source close];
-}
-
-+(NSArray*) fileTypes {
-    return [NSArray arrayWithObjects:@"flac", nil];
 }
 
 -(NSDictionary*) properties {
@@ -134,7 +131,7 @@
 }
 
 static FLAC__StreamDecoderReadStatus FLACReadCallback(const FLAC__StreamDecoder* decoder, FLAC__byte buffer[], size_t* bytes, void* clientData) {
-    BachFlacParser* parser = (__bridge BachFlacParser*) clientData;
+    BachFLACParser* parser = (__bridge BachFLACParser*) clientData;
     if (*bytes > 0) {
         *bytes = [[parser source] read:buffer amount:*bytes];
         if (*bytes == 0) {
@@ -148,7 +145,7 @@ static FLAC__StreamDecoderReadStatus FLACReadCallback(const FLAC__StreamDecoder*
 }
 
 static FLAC__StreamDecoderSeekStatus FLACSeekCallback(const FLAC__StreamDecoder *decoder, FLAC__uint64 absoluteByteOffset, void *clientData) {
-    BachFlacParser* parser = (__bridge BachFlacParser*) clientData;
+    BachFLACParser* parser = (__bridge BachFLACParser*) clientData;
     
     int ok = [[parser source] seek:(long)absoluteByteOffset startingPosition:SEEK_SET];
     if (!ok) {
@@ -159,7 +156,7 @@ static FLAC__StreamDecoderSeekStatus FLACSeekCallback(const FLAC__StreamDecoder 
 }
 
 static FLAC__StreamDecoderTellStatus FLACTellCallback(const FLAC__StreamDecoder *decoder, FLAC__uint64* absoluteByteOffset, void* clientData) {
-    BachFlacParser* parser = (__bridge BachFlacParser*) clientData;
+    BachFLACParser* parser = (__bridge BachFLACParser*) clientData;
     
     long position = [[parser source] tell];
     if (position < 0) {
@@ -169,21 +166,24 @@ static FLAC__StreamDecoderTellStatus FLACTellCallback(const FLAC__StreamDecoder 
     }
 }
 
-static FLAC__StreamDecoderLengthStatus FLACLengthCallback(const FLAC__StreamDecoder* decoder, FLAC__uint64* streamLength, void* clientData) {
-    BachFlacParser* parser = (__bridge BachFlacParser*) clientData;
+static FLAC__StreamDecoderLengthStatus FLACLengthCallback(const FLAC__StreamDecoder* decoder, FLAC__uint64* streamLength, void* clientData)
+{
+    BachFLACParser* parser = (__bridge BachFLACParser*) clientData;
     
     *streamLength = [[parser source] size];
     return FLAC__STREAM_DECODER_LENGTH_STATUS_OK;
 }
 
-static FLAC__bool FLACEndOfFileCallback(const FLAC__StreamDecoder* decoder, void* clientData) {
-    BachFlacParser* parser = (__bridge BachFlacParser*) clientData;
+static FLAC__bool FLACEndOfFileCallback(const FLAC__StreamDecoder* decoder, void* clientData)
+{
+    BachFLACParser* parser = (__bridge BachFLACParser*) clientData;
     return [[parser source] endOfSource];
 }
 
-static FLAC__StreamDecoderWriteStatus FLACWriteCallback(const FLAC__StreamDecoder* decoder, const FLAC__Frame* frame, const FLAC__int32 * const buffer [], void* clientData) {
+static FLAC__StreamDecoderWriteStatus FLACWriteCallback(const FLAC__StreamDecoder* decoder, const FLAC__Frame* frame, const FLAC__int32 * const buffer [], void* clientData)
+{
     
-    BachFlacParser* parser = (__bridge BachFlacParser*) clientData;
+    BachFLACParser* parser = (__bridge BachFLACParser*) clientData;
 
     void *bbuf = [parser writeBuffer];
     int8_t  *alias8;
@@ -240,8 +240,9 @@ static FLAC__StreamDecoderWriteStatus FLACWriteCallback(const FLAC__StreamDecode
     return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
 }
 
-static void FLACMetadataCallback(const FLAC__StreamDecoder* decoder, const FLAC__StreamMetadata* metadata, void* clientData) {
-    BachFlacParser* parser = (__bridge BachFlacParser*) clientData;
+static void FLACMetadataCallback(const FLAC__StreamDecoder* decoder, const FLAC__StreamMetadata* metadata, void* clientData)
+{
+    BachFLACParser* parser = (__bridge BachFLACParser*) clientData;
     if (metadata->type == FLAC__METADATA_TYPE_STREAMINFO) {
         FLAC__StreamMetadata_StreamInfo info = metadata->data.stream_info;
         [parser setChannels:info.channels];
@@ -252,19 +253,20 @@ static void FLACMetadataCallback(const FLAC__StreamDecoder* decoder, const FLAC_
     } else if (metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT) {
         FLAC__StreamMetadata_VorbisComment comment = metadata->data.vorbis_comment;
         for (int i = 0; i < comment.num_comments; i++) {
-            NSArray* entryArr = [[NSString stringWithUTF8String:comment.comments[i].entry] componentsSeparatedByString:@"="];
+            FLAC__byte* entry = comment.comments[i].entry;
+            NSString* entryString = [[NSString alloc] initWithBytes:entry length:comment.comments[i].length encoding:NSASCIIStringEncoding];
+            NSArray* entryArr = [entryString componentsSeparatedByString:@"="];
             NSString* key = [[NSString stringWithString:[entryArr objectAtIndex:0]] lowercaseString];
             NSString* value = [NSString stringWithString:[entryArr objectAtIndex:1]];
             NSMutableDictionary* meta = [NSMutableDictionary dictionaryWithDictionary:[parser metadata]];
             [meta setObject:value forKey:key];
             parser.metadata = meta;
         }
-    } else if (metadata->type == FLAC__METADATA_TYPE_CUESHEET) {
-        FLAC__StreamMetadata_CueSheet cueSheet = metadata->data.cue_sheet;
     }
 }
 
-static void FLACErrorCallback(const FLAC__StreamDecoder* decoder, FLAC__StreamDecoderErrorStatus status, void* clientData) {
+static void FLACErrorCallback(const FLAC__StreamDecoder* decoder, FLAC__StreamDecoderErrorStatus status, void* clientData)
+{
     
 }
 

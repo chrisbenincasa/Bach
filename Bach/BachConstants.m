@@ -7,6 +7,6 @@
 //
 
 #import "BachConstants.h"
-
-NSString* const kBachStateKey = @"bach.player.state";
-NSString* const kBachEndOfInputKey = @"bach.player.endOfInput";
+/*
+static const NSString* kBachStateKey = @"bach.player.state";
+static const NSString* kBachEndOfInputKey = @"bach.player.endOfInput";*/

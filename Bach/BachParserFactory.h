@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "BachFileTypes.h"
 #import "BachParserType.h"
 #import "BachParser.h"
 

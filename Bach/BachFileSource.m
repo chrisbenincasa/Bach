@@ -13,15 +13,11 @@
 @synthesize url;
 @synthesize size;
 
--(BachParserType) parserType {
-    return CoreAudio;
-}
-
--(void) dealloc {
+-(void)dealloc {
     [self close];
 }
 
--(BOOL) open:(NSURL *)newUrl {
+-(BOOL)open:(NSURL *)newUrl {
 	[self setUrl:newUrl];
 	_fd = fopen([[self.url path] UTF8String], "rb");
     if (_fd != NULL) {
@@ -34,7 +30,7 @@
     }
 }
 
--(int) read:(void *)buffer amount:(int)amount {
+-(size_t)read:(void *)buffer amount:(size_t)amount {
 	return fread(buffer, 1, amount, _fd);
 }
 
@@ -42,15 +38,15 @@
     return ftell(_fd);
 }
 
--(BOOL) seek:(long)position startingPosition:(int)startPos {
+-(BOOL)seek:(long)position startingPosition:(int)startPos {
 	return (fseek(_fd, position, startPos) == 0);
 }
 
--(BOOL) endOfSource {
+-(BOOL)endOfSource {
     return ftell(_fd) == SEEK_END;
 }
 
--(void) close {
+-(void)close {
     if (_fd) {
         fclose(_fd);
     }

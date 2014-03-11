@@ -22,7 +22,6 @@
 @property (strong, nonatomic) id<BachSource> source;
 
 @required
-+(NSArray*) fileTypes;
 -(BOOL) openSource:(id<BachSource>) src;
 -(int) readFrames:(void*) buffer frames:(UInt32) nFrames;
 -(void) seek:(float) position;

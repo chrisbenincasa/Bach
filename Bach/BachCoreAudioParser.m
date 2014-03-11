@@ -15,17 +15,6 @@
 @synthesize source;
 @synthesize metadata;
 
-+(NSArray*) fileTypes {
-    NSArray* extensions;
-    UInt32 size = sizeof(extensions);
-    OSStatus err = AudioFileGetGlobalInfo(kAudioFileGlobalInfo_AllExtensions, 0, NULL, &size, &extensions);
-    if (err != 0) {
-        return nil;
-    }
-    
-    return extensions;
-}
-
 -(void) dealloc {
     ExtAudioFileDispose(_extAudioFile);
     AudioFileClose(_audioFile);
