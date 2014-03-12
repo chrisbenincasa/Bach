@@ -12,14 +12,14 @@
 
 @property (strong, nonatomic) AVURLAsset* avAsset;
 @property (strong, nonatomic) NSMutableDictionary* metadataDict;
-@property (strong, nonatomic) NSString* trackName;
-@property (strong, nonatomic) NSString* artistName;
 
 @end
 
 @implementation BachCoreAudioMetadata
 
 @synthesize assetURL;
+
+#pragma mark Initializers
 
 -(id)initWithURL:(NSURL*)url {
     if (self = [super init]) {
@@ -35,59 +35,175 @@
     _avAsset = [[AVURLAsset alloc] initWithURL:assetURL options:nil];
 }
 
+#pragma mark Accessors
+
 -(NSString*)trackName {
     if (!_avAsset) return nil;
     
-    if (!_trackName) {
-        NSString* track = [self getMetadataValueForCommonKey:AVMetadataCommonKeyTitle];
-        if (!track) {
-            track = [self getMetadataValueForID3Key:AVMetadataID3MetadataKeyTitleDescription];
-        }
-        _trackName = track;
-    }
-    
-    return _trackName;
+    return [self getOrUpdateMetadataValueForCommonKey:AVMetadataCommonKeyTitle
+                                      withID3Fallback:AVMetadataID3MetadataKeyTitleDescription
+                                   withiTunesFallback:AVMetadataiTunesMetadataKeySongName];
 }
 
 -(NSString*)artistName {
     if (!_avAsset) return nil;
     
-    if (!self.artistName) {
-        NSString* artist = [self getMetadataValueForCommonKey:AVMetadataCommonKeyArtist];
-        if (!artist) {
-            artist = [self getMetadataValueForID3Key:AVMetadataID3MetadataKeyOriginalArtist];
-        }
-        
-        self.artistName = artist;
-    }
-    
-    return self.artistName;
+    return [self getOrUpdateMetadataValueForCommonKey:AVMetadataCommonKeyArtist
+                                      withID3Fallback:AVMetadataID3MetadataKeyOriginalArtist
+                                   withiTunesFallback:AVMetadataiTunesMetadataKeyArtist];
 }
 
--(NSString*)getMetadataValueForCommonKey:(NSString*)key {
-    for (AVMetadataItem* item in [_avAsset commonMetadata]) {
-        if ([item.commonKey isEqualToString:key]) {
-            return [item stringValue];
+-(NSString*)albumName {
+    if (!_avAsset) return nil;
+    
+    return [self getOrUpdateMetadataValueForCommonKey:AVMetadataCommonKeyAlbumName
+                                      withID3Fallback:AVMetadataID3MetadataKeyAlbumTitle
+                                   withiTunesFallback:AVMetadataiTunesMetadataKeyAlbum];
+}
+
+-(NSString*)date {
+    if (!_avAsset) return nil;
+    
+    return [self getOrUpdateMetadataValueForCommonKey:AVMetadataCommonKeyCreationDate
+                                      withID3Fallback:AVMetadataID3MetadataKeyYear
+                                   withiTunesFallback:AVMetadataiTunesMetadataKeyReleaseDate];
+}
+
+-(NSString*)genre {
+    if (!_avAsset) return nil;
+    
+    return [self getOrUpdateMetadataValueForCommonKey:nil
+                                      withID3Fallback:nil
+                                   withiTunesFallback:AVMetadataiTunesMetadataKeyUserGenre];
+}
+
+-(NSData*)artwork {
+    if (!_avAsset) return nil;
+    
+    return [self findArtwork];
+}
+
+#pragma mark Private methods
+
+-(NSString*)getOrUpdateMetadataValueForCommonKey:(NSString*)commonKey
+                                 withID3Fallback:(NSString*)ID3FallbackKey
+                              withiTunesFallback:(NSString*)iTunesFallbackKey {
+    NSString* value = nil;
+    
+    if (commonKey) {
+        value = [self getMetadataValueByKey:commonKey orSetWithBlock:^NSString *(NSMutableDictionary *meta) {
+            NSString* metaValue = [self findMetadataValueForCommonKey:commonKey];
+            [meta setObject:metaValue forKey:commonKey];
+            return metaValue;
+        }];
+        
+        if (value) return value;
+    }
+    
+    if (ID3FallbackKey && !value) {
+        value = [self getMetadataValueByKey:ID3FallbackKey orSetWithBlock:^NSString *(NSMutableDictionary *meta) {
+            NSString* metaValue = [self findMetadataValueForID3Key:ID3FallbackKey];
+            [meta setObject:metaValue forKey:ID3FallbackKey];
+            return metaValue;
+        }];
+        
+        if (value) return value;
+    }
+    
+    if (iTunesFallbackKey && !value) {
+        value = [self getMetadataValueByKey:iTunesFallbackKey orSetWithBlock:^NSString *(NSMutableDictionary *meta) {
+            NSString* metaValue = [self findMetdataValueForiTunesKey:iTunesFallbackKey];
+            [meta setObject:metaValue forKey:iTunesFallbackKey];
+            return metaValue;
+        }];
+        
+        if (value) return value;
+    }
+    
+    return value;
+}
+
+-(NSString*)getMetadataValueByKey:(NSString*)key orSetWithBlock:(NSString* (^)(NSMutableDictionary*))block {
+    NSString* value = [_metadataDict objectForKey:key];
+    if (value) {
+        return value;
+    } else {
+        return block(_metadataDict);
+    }
+}
+
+-(NSString*)findMetadataValueForCommonKey:(NSString*)key
+{
+    AVMetadataItem* item = [self findMetdataItemForKey:key withFormat:AVMetadataKeySpaceCommon];
+    if (item) {
+        return [item stringValue];
+    } else {
+        return nil;
+    }
+}
+
+-(NSString*)findMetadataValueForID3Key:(NSString*)key
+{
+    AVMetadataItem* item = [self findMetdataItemForKey:key withFormat:AVMetadataFormatID3Metadata];
+    if (item) {
+        return [item stringValue];
+    } else {
+        return nil;
+    }
+}
+
+-(NSString*)findMetdataValueForiTunesKey:(NSString*)key
+{
+    AVMetadataItem* item = [self findMetdataItemForKey:key withFormat:AVMetadataFormatiTunesMetadata];
+    if (item) {
+        return [item stringValue];
+    } else {
+        return nil;
+    }
+}
+
+-(AVMetadataItem*)findMetdataItemForKey:(NSString*)key withFormat:(NSString*)format
+{
+    if (!_avAsset) return nil;
+    
+    if (![[_avAsset availableMetadataFormats] containsObject:format]) return nil;
+    
+    for (AVMetadataItem* item in [_avAsset metadataForFormat:format]) {
+        if ([[item key] isKindOfClass:[NSString class]]) {
+            NSString* key = (NSString*)[item key];
+            if ([key isEqualToString:key]) {
+                return item;
+            }
+        } else if ([[item key] isKindOfClass:[NSNumber class]]) {
+            NSNumber* keyAsNumber = (NSNumber *)[item key];
+            NSString* keyAsString = stringForOSType([keyAsNumber unsignedIntValue]);
+            if ([keyAsString isEqualToString:key]) {
+                return item;
+            }
+        } else if ([[item key] isKindOfClass:[NSObject class]]) {
+            NSString* keyAsString = [(NSObject *)[item key] description];
+            if ([keyAsString isEqualToString:key]) {
+                return item;
+            }
         }
     }
     
     return nil;
 }
 
--(NSString*)getMetadataValueForID3Key:(NSString*)key {
-    for (AVMetadataItem* item in [_avAsset metadataForFormat:AVMetadataFormatID3Metadata]) {
-        if ([[item key] isKindOfClass:[NSNumber class]]) {
-            NSNumber* keyAsNumber = (NSNumber *)[item key];
-            NSString* keyAsString = stringForOSType([keyAsNumber unsignedIntValue]);
-            if ([keyAsString isEqualToString:key]) {
-                return [item stringValue];
-            }
-        } else if ([[item key] isKindOfClass:[NSObject class]]) {
-            NSString* keyAsString = [(NSObject *)[item key] description];
-            if ([keyAsString isEqualToString:key]) {
-                return [item stringValue];
-            }
-        }
+-(NSData*)findArtwork
+{
+    AVMetadataItem* item = nil;
+    
+    item = [self findMetdataItemForKey:AVMetadataCommonKeyArtwork withFormat:AVMetadataKeySpaceCommon];
+    if (item && [item isKindOfClass:[NSData class]]) {
+        return (NSData*)item.value;
+    }
+    
+    item = [self findMetdataItemForKey:AVMetadataiTunesMetadataKeyCoverArt withFormat:AVMetadataKeySpaceiTunes];
+    
+    if (item && [item isKindOfClass:[NSData class]]) {
+        return (NSData*)item.value;
     }
     
     return nil;
@@ -112,31 +228,6 @@ static NSString * stringForOSType(OSType theOSType)
     cstring[len] = 0;
     
     return [NSString stringWithCString:(char *)cstring encoding:NSMacOSRomanStringEncoding];
-}
-
-static NSString * stringForDataDescription(NSData *data)
-{
-    NSMutableString *str = [NSMutableString stringWithCapacity:64];
-    NSUInteger length = [data length];
-    const unsigned char *bytes = (const unsigned char *)[data bytes];
-    int i;
-    
-    [str appendFormat:@"[ data length = %u, bytes = 0x", (unsigned int)length];
-    
-    // Dump 24 bytes of data in hex
-    if (length <= 24) {
-        for (i = 0; i < length; i++)
-            [str appendFormat:@"%02x", bytes[i]];
-    } else {
-        for (i = 0; i < 16; i++)
-            [str appendFormat:@"%02x", bytes[i]];
-        [str appendFormat:@" ... "];
-        for (i = length - 8; i < length; i++)
-            [str appendFormat:@"%02x", bytes[i]];
-    }
-    [str appendFormat:@" ]"];
-    
-    return str;
 }
 
 @end

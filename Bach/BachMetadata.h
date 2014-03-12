@@ -29,7 +29,13 @@
 -(id)initWithURL:(NSURL*)url;
 
 @required
+
 -(NSString*)trackName;
+-(NSString*)artistName;
+-(NSString*)albumName;
+-(NSString*)genre;
+-(NSString*)date;
+-(NSData*)artwork;
 
 @optional
 

@@ -33,7 +33,8 @@ static NSString* kVorbisTotalDiscNumberKey = @"totaldiscs";
 
 #pragma mark Initialization
 
--(id)initWithURL:(NSURL *)url {
+-(id)initWithURL:(NSURL *)url
+{
     if (self = [super init]) {
         assetURL = url;
         _source = [[BachFileSource alloc] init];
@@ -67,7 +68,8 @@ static NSString* kVorbisTotalDiscNumberKey = @"totaldiscs";
     return self;
 }
 
--(void)dealloc {
+-(void)dealloc
+{
     FLAC__stream_decoder_finish(_decoder);
     FLAC__stream_decoder_delete(_decoder);
     [_source close];
@@ -75,8 +77,34 @@ static NSString* kVorbisTotalDiscNumberKey = @"totaldiscs";
 
 #pragma mark Accessors
 
--(NSString*)trackName {
+-(NSString*)trackName
+{
     return [_metadataDict objectForKey:kVorbisTrackKey];
+}
+
+-(NSString*)artistName
+{
+    return [_metadataDict objectForKey:kVorbisArtistKey];
+}
+
+-(NSString*)albumName
+{
+    return [_metadataDict objectForKey:kVorbisAlbumKey];
+}
+
+-(NSString*)genre
+{
+    return [_metadataDict objectForKey:kVorbisGenreKey];
+}
+
+-(NSString*)date
+{
+    return [_metadataDict objectForKey:kVorbisDateKey];
+}
+
+-(NSData*)artwork
+{
+    return _picture;
 }
 
 #pragma mark FLAC callbacks
@@ -96,12 +124,14 @@ static FLAC__StreamDecoderReadStatus FLACReadCallback(const FLAC__StreamDecoder*
     }
 }
 
-static FLAC__StreamDecoderWriteStatus FLACWriteCallback(const FLAC__StreamDecoder* decoder, const FLAC__Frame* frame, const FLAC__int32 * const buffer [], void* clientData) {
+static FLAC__StreamDecoderWriteStatus FLACWriteCallback(const FLAC__StreamDecoder* decoder, const FLAC__Frame* frame, const FLAC__int32 * const buffer [], void* clientData)
+{
     
     return FLAC__STREAM_DECODER_WRITE_STATUS_CONTINUE;
 }
 
-static void FLACMetadataCallback(const FLAC__StreamDecoder* decoder, const FLAC__StreamMetadata* metadata, void* clientData) {
+static void FLACMetadataCallback(const FLAC__StreamDecoder* decoder, const FLAC__StreamMetadata* metadata, void* clientData)
+{
     BachFLACMetadata* meta = (__bridge BachFLACMetadata*) clientData;
     if (metadata->type == FLAC__METADATA_TYPE_VORBIS_COMMENT) {
         FLAC__StreamMetadata_VorbisComment comment = metadata->data.vorbis_comment;

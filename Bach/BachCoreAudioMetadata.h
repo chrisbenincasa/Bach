@@ -13,4 +13,15 @@
 
 @interface BachCoreAudioMetadata : NSObject <BachMetadata>
 
+-(NSString*)getOrUpdateMetadataValueForCommonKey:(NSString*)commonKey
+                                 withID3Fallback:(NSString*)ID3FallbackKey
+                              withiTunesFallback:(NSString*)iTunesFallbackKey;
+
+-(NSString*)getMetadataValueByKey:(NSString*)key orSetWithBlock:(NSString* (^)(NSMutableDictionary*))block;
+-(NSString*)findMetadataValueForCommonKey:(NSString*)key;
+-(NSString*)findMetadataValueForID3Key:(NSString*)key;
+-(NSString*)findMetdataValueForiTunesKey:(NSString*)key;
+-(AVMetadataItem*)findMetdataItemForKey:(NSString*)key withFormat:(NSString*)format;
+-(NSData*)findArtwork;
+
 @end
