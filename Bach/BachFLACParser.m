@@ -95,8 +95,6 @@
     
     FLAC__StreamDecoderInitStatus err;
     
-//    FLAC__stream_decoder_set_metadata_respond(_decoder, FLAC__METADATA_TYPE_VORBIS_COMMENT);
-    
     err = FLAC__stream_decoder_init_stream(_decoder,
                                            FLACReadCallback,
                                            FLACSeekCallback,

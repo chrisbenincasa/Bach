@@ -40,8 +40,6 @@
 -(NSString*)trackName {
     if (!_avAsset) return nil;
     
-    NSLog(@"%@, %d", AVMetadataiTunesMetadataKeySongName, AVMetadataiTunesMetadataKeySongName);
-    
     return [self getOrUpdateMetadataValueForCommonKey:AVMetadataCommonKeyTitle
                                       withID3Fallback:AVMetadataID3MetadataKeyTitleDescription
                                    withiTunesFallback:AVMetadataiTunesMetadataKeySongName];
