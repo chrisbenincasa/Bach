@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol BachMetadata;
 @class BachConverter;
 @class BachInput;
 @class BachOutput;
@@ -46,7 +47,7 @@ typedef NS_ENUM(NSInteger, BachState) {
 -(void) setVolume:(float) volume;
 -(double) totalTrackTime;
 -(double) currentTrackTime;
--(NSDictionary*) metadata;
+-(id<BachMetadata>) metadata;
 
 #pragma mark private
 

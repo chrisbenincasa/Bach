@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
+#import "BachFLACMetadata.h"
 #import "BachParser.h"
 #import "FLAC/all.h"
 

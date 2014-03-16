@@ -95,7 +95,7 @@
     
     FLAC__StreamDecoderInitStatus err;
     
-    FLAC__stream_decoder_set_metadata_respond(_decoder, FLAC__METADATA_TYPE_VORBIS_COMMENT);
+//    FLAC__stream_decoder_set_metadata_respond(_decoder, FLAC__METADATA_TYPE_VORBIS_COMMENT);
     
     err = FLAC__stream_decoder_init_stream(_decoder,
                                            FLACReadCallback,
@@ -114,6 +114,8 @@
     }
     
     FLAC__stream_decoder_process_until_end_of_metadata(_decoder);
+    
+    self.metadata = [[BachFLACMetadata alloc] initWithURL:[self.source url]];
     
     _writeBufferSize = (FLAC__MAX_BLOCK_SIZE + 512) * 2 * 3;
     writeBuffer = malloc(_writeBufferSize);

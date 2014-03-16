@@ -152,7 +152,7 @@
     return desc;
 }
 
--(NSDictionary*) metadata {
+-(id<BachMetadata>) metadata {
     return [_parser metadata];
 }
 

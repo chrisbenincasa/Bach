@@ -11,6 +11,7 @@
 #import "BachDispatch.h"
 #import "BachConverter.h"
 #import "BachInput.h"
+#import "BachMetadata.h"
 #import "BachOutput.h"
 
 #if __BACH_DEBUG
@@ -183,7 +184,7 @@
     [[NSNotificationCenter defaultCenter] postNotification:stateChange];
 }
 
--(NSDictionary*) metadata {
+-(id<BachMetadata>) metadata {
     return [_input metadata];
 }
 

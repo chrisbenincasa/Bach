@@ -40,6 +40,8 @@
 -(NSString*)trackName {
     if (!_avAsset) return nil;
     
+    NSLog(@"%@, %d", AVMetadataiTunesMetadataKeySongName, AVMetadataiTunesMetadataKeySongName);
+    
     return [self getOrUpdateMetadataValueForCommonKey:AVMetadataCommonKeyTitle
                                       withID3Fallback:AVMetadataID3MetadataKeyTitleDescription
                                    withiTunesFallback:AVMetadataiTunesMetadataKeySongName];
@@ -226,6 +228,11 @@ static NSString * stringForOSType(OSType theOSType)
     
     strncpy(cstring, (char *)addr, len);
     cstring[len] = 0;
+    
+    // Standardize between 4CC and AVMetadataKey Constants
+    if (cstring[0] == '\xa9') {
+        cstring[0] = '@';
+    }
     
     return [NSString stringWithCString:(char *)cstring encoding:NSMacOSRomanStringEncoding];
 }

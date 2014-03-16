@@ -39,6 +39,6 @@
 -(void) seek:(float) time flush:(BOOL) flush;
 -(double)totalFrames;
 -(AudioStreamBasicDescription) format;
--(NSDictionary*) metadata;
+-(id<BachMetadata>) metadata;
 
 @end

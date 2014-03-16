@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
+#import "BachCoreAudioMetadata.h"
 #import "BachDispatch.h"
 #import "BachHelper.h"
 #import "BachParser.h"

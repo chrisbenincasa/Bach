@@ -138,23 +138,13 @@
         
         _totalFrames = totalSize;
     }];
+    
+    self.metadata = [[BachCoreAudioMetadata alloc] initWithURL:[self.source url]];
 
     AudioFileID audioFile;
     size = sizeof(audioFile);
     err = ExtAudioFileGetProperty(_extAudioFile, kExtAudioFileProperty_AudioFile, &size, &audioFile);
     
-    if (err == 0) {
-        // Load metadata asynchroniously?
-        UInt32 dictionarySize = 0;
-        err = AudioFileGetPropertyInfo(audioFile, kAudioFilePropertyInfoDictionary, &dictionarySize, 0);
-        if (!err) {
-            CFDictionaryRef dictionary;
-            AudioFileGetProperty(audioFile, kAudioFilePropertyInfoDictionary, &dictionarySize, &dictionary);
-            self.metadata = [NSMutableDictionary dictionaryWithDictionary:(__bridge NSDictionary *)dictionary];
-            CFRelease(dictionary);
-        }
-    }
-
     AudioStreamBasicDescription result;
     bzero(&result, sizeof(AudioStreamBasicDescription));
     
