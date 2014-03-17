@@ -28,7 +28,6 @@
 		1491912318CB7078004FFC8F /* Bach.h in Headers */ = {isa = PBXBuildFile; fileRef = 1491912118CB7078004FFC8F /* Bach.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1491912418CB7078004FFC8F /* Bach.m in Sources */ = {isa = PBXBuildFile; fileRef = 1491912218CB7078004FFC8F /* Bach.m */; };
 		1491912618CB7265004FFC8F /* BachHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 142980CC18A1CF07002422C8 /* BachHelper.m */; };
-		1491912718CB7265004FFC8F /* BachConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1434610918A690F10072FE29 /* BachConstants.m */; };
 		1491912818CB7265004FFC8F /* BachRingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 14ADFD0C18A83BF00068C129 /* BachRingBuffer.m */; };
 		1491912918CB7265004FFC8F /* BachStopwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 140A4E8618B909D3009AE87A /* BachStopwatch.m */; };
 		1491912A18CB7265004FFC8F /* BachDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 14012FDD189D7711008765B3 /* BachDispatch.m */; };
@@ -91,7 +90,6 @@
 		142980CB18A1CF07002422C8 /* BachHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachHelper.h; sourceTree = "<group>"; };
 		142980CC18A1CF07002422C8 /* BachHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachHelper.m; sourceTree = "<group>"; };
 		1434610818A690F10072FE29 /* BachConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BachConstants.h; sourceTree = "<group>"; };
-		1434610918A690F10072FE29 /* BachConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BachConstants.m; sourceTree = "<group>"; };
 		1434611118A7D3F60072FE29 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1491908A18CB612F004FFC8F /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		149190AE18CB6F7A004FFC8F /* Bach.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bach.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,7 +263,6 @@
 				142980CB18A1CF07002422C8 /* BachHelper.h */,
 				142980CC18A1CF07002422C8 /* BachHelper.m */,
 				1434610818A690F10072FE29 /* BachConstants.h */,
-				1434610918A690F10072FE29 /* BachConstants.m */,
 				14ADFD0B18A83BF00068C129 /* BachRingBuffer.h */,
 				14ADFD0C18A83BF00068C129 /* BachRingBuffer.m */,
 				140A4E8518B909D3009AE87A /* BachStopwatch.h */,
@@ -386,7 +383,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1491912618CB7265004FFC8F /* BachHelper.m in Sources */,
-				1491912718CB7265004FFC8F /* BachConstants.m in Sources */,
 				1491912818CB7265004FFC8F /* BachRingBuffer.m in Sources */,
 				1491912918CB7265004FFC8F /* BachStopwatch.m in Sources */,
 				1494332C18CF709A00F3F315 /* BachMetadata.m in Sources */,
