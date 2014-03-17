@@ -44,9 +44,9 @@
 		1491913418CB72A0004FFC8F /* FLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012F90189D5BBD008765B3 /* FLAC.framework */; };
 		1491913518CB72A9004FFC8F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012FE0189D7C47008765B3 /* AudioToolbox.framework */; };
 		1491913618CB72A9004FFC8F /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14012FD5189D6A99008765B3 /* AudioUnit.framework */; };
-		1494332018CE84B800F3F315 /* BachCoreAudioMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 1494331E18CE84B800F3F315 /* BachCoreAudioMetadata.h */; };
+		1494332018CE84B800F3F315 /* BachCoreAudioMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 1494331E18CE84B800F3F315 /* BachCoreAudioMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1494332118CE84B800F3F315 /* BachCoreAudioMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 1494331F18CE84B800F3F315 /* BachCoreAudioMetadata.m */; };
-		1494332418CE84C300F3F315 /* BachFLACMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 1494332218CE84C300F3F315 /* BachFLACMetadata.h */; };
+		1494332418CE84C300F3F315 /* BachFLACMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 1494332218CE84C300F3F315 /* BachFLACMetadata.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1494332518CE84C300F3F315 /* BachFLACMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 1494332318CE84C300F3F315 /* BachFLACMetadata.m */; };
 		1494332618CE857600F3F315 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1434611118A7D3F60072FE29 /* AVFoundation.framework */; };
 		1494332918CF6F9600F3F315 /* BachFileTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 1494332718CF6F9600F3F315 /* BachFileTypes.h */; };
@@ -297,8 +297,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1491912318CB7078004FFC8F /* Bach.h in Headers */,
-				1494332418CE84C300F3F315 /* BachFLACMetadata.h in Headers */,
 				1494332D18CF713B00F3F315 /* BachMetadata.h in Headers */,
+				1494332018CE84B800F3F315 /* BachCoreAudioMetadata.h in Headers */,
+				1494332418CE84C300F3F315 /* BachFLACMetadata.h in Headers */,
 				149190D418CB6F9E004FFC8F /* BachConstants.h in Headers */,
 				149190D218CB6F9E004FFC8F /* BachHelper.h in Headers */,
 				149190D618CB6F9E004FFC8F /* BachRingBuffer.h in Headers */,
@@ -314,7 +315,6 @@
 				149190E618CB6F9E004FFC8F /* BachParserPropertyKeys.h in Headers */,
 				149190E718CB6F9E004FFC8F /* BachFLACParser.h in Headers */,
 				149190E918CB6F9E004FFC8F /* BachOutput.h in Headers */,
-				1494332018CE84B800F3F315 /* BachCoreAudioMetadata.h in Headers */,
 				149190EB18CB6F9E004FFC8F /* BachSource.h in Headers */,
 				149190EC18CB6F9E004FFC8F /* BachFileSource.h in Headers */,
 				149190EE18CB6F9E004FFC8F /* BachInput.h in Headers */,
