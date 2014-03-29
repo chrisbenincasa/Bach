@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 #import "BachDispatch.h"
-#import "BachParser.h"
-#import "BachParserFactory.h"
-#import "BachParserPropertyKeys.h"
+#import "BachDecoder.h"
+#import "BachDecoderFactory.h"
+#import "BachDecoderPropertyKeys.h"
 #import "BachSource.h"
 #import "BachSourceFactory.h"
 
@@ -24,7 +24,7 @@
 @property(assign, nonatomic) void* inputBuf;
 
 @property(strong, nonatomic) id<BachSource> source;
-@property(strong, nonatomic) id<BachParser> parser;
+@property(strong, nonatomic) id<BachDecoder> decoder;
 @property(assign, nonatomic) int bytesPerFrame;
 @property(assign, nonatomic) int bytesPerPacket;
 

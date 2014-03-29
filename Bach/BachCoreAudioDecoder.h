@@ -9,12 +9,12 @@
 #import "BachCoreAudioMetadata.h"
 #import "BachDispatch.h"
 #import "BachHelper.h"
-#import "BachParser.h"
+#import "BachDecoder.h"
 
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface BachCoreAudioParser : NSObject <BachParser>
+@interface BachCoreAudioDecoder : NSObject <BachDecoder>
 
 @property(assign, nonatomic) AudioFileID audioFile;
 @property(assign, nonatomic) ExtAudioFileRef extAudioFile;

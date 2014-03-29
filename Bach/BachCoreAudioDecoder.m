@@ -1,14 +1,14 @@
 //
-//  BachCoreAudioParser.m
+//  BachCoreAudioDecoder.m
 //  Bach
 //
 //  Created by Christian Benincasa on 2/1/14.
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
-#import "BachCoreAudioParser.h"
+#import "BachCoreAudioDecoder.h"
 
-@implementation BachCoreAudioParser
+@implementation BachCoreAudioDecoder
 
 @synthesize description;
 @synthesize properties;

@@ -1,5 +1,5 @@
 //
-//  BachFLACParser.h
+//  BachFLACDecoder.h
 //  Bach
 //
 //  Created by Christian Benincasa on 2/5/14.
@@ -7,12 +7,12 @@
 //
 
 #import "BachFLACMetadata.h"
-#import "BachParser.h"
+#import "BachDecoder.h"
 #import "FLAC/all.h"
 
 #import <Foundation/Foundation.h>
 
-@interface BachFLACParser : NSObject <BachParser>
+@interface BachFLACDecoder : NSObject <BachDecoder>
 
 @property(assign, nonatomic) void* writeBuffer;
 @property(assign, nonatomic) int bufferFrames;

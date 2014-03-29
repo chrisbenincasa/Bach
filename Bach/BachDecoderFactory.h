@@ -1,5 +1,5 @@
 //
-//  BachParserFactory.h
+//  BachDecoderFactory.h
 //  Bach
 //
 //  Created by Christian Benincasa on 2/1/14.
@@ -9,13 +9,13 @@
 #import <Foundation/Foundation.h>
 
 #import "BachFileTypes.h"
-#import "BachParserType.h"
-#import "BachParser.h"
+#import "BachDecoderType.h"
+#import "BachDecoder.h"
 
-@protocol BachParser;
+@protocol BachDecoder;
 
-@interface BachParserFactory : NSObject
+@interface BachDecoderFactory : NSObject
 
-+(id<BachParser>) create: (NSString*) ext;
++(id<BachDecoder>) create: (NSString*) ext;
 
 @end

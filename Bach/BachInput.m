@@ -55,24 +55,24 @@
         return NO;
     }
     
-    self.parser = [BachParserFactory create:[url pathExtension]];
+    self.decoder = [BachDecoderFactory create:[url pathExtension]];
     
-    if (!_parser) {
+    if (!_decoder) {
 #if BACH_DEBUG
         NSLog(@"unable to initialize parser");
 #endif
         return NO;
     }
     
-    if (![_parser openSource:_source]) {
+    if (![_decoder openSource:_source]) {
 #if BACH_DEBUG
         NSLog(@"unable to open source within parser");
 #endif
         return NO;
     }
     
-    int bitsPerChannel = [[[_parser properties] objectForKey:[NSNumber numberWithInteger:BITS_PER_CHANNEL]] intValue];
-    int channels = [[[_parser properties] objectForKey: [NSNumber numberWithInteger:CHANNELS]] intValue];
+    int bitsPerChannel = [[[_decoder properties] objectForKey:[NSNumber numberWithInteger:BITS_PER_CHANNEL]] intValue];
+    int channels = [[[_decoder properties] objectForKey: [NSNumber numberWithInteger:CHANNELS]] intValue];
     _bytesPerFrame = (bitsPerChannel / 8) * channels;
     
     [self setAtEnd:NO];
@@ -91,7 +91,7 @@
             break;
         }
         
-        framesRead = [_parser readFrames:_inputBuf frames:(_readSize / _bytesPerFrame)];
+        framesRead = [_decoder readFrames:_inputBuf frames:(_readSize / _bytesPerFrame)];
         bufferLength = framesRead * _bytesPerFrame;
 
         [[BachDispatch blocking_queue] addOperationWithBlock:^{
@@ -111,19 +111,19 @@
 }
 
 -(void) seek:(float) time flush:(BOOL) flush {
-    _seekPosition = time * [[[_parser properties] objectForKey:[NSNumber numberWithInteger:SAMPLE_RATE]] floatValue];
+    _seekPosition = time * [[[_decoder properties] objectForKey:[NSNumber numberWithInteger:SAMPLE_RATE]] floatValue];
     if (flush) {
         [[BachDispatch blocking_queue] addOperationWithBlock:^{
             [_buffer setLength:0];
         }];
         [[BachDispatch blocking_queue] waitUntilAllOperationsAreFinished];
-        [_parser flush];
+        [_decoder flush];
     }
-    [_parser seek: _seekPosition];
+    [_decoder seek: _seekPosition];
 }
 
 -(double) totalFrames {
-    return [[[_parser properties] objectForKey:[NSNumber numberWithInteger:TOTAL_FRAMES]] doubleValue];
+    return [[[_decoder properties] objectForKey:[NSNumber numberWithInteger:TOTAL_FRAMES]] doubleValue];
 }
 
 -(AudioStreamBasicDescription) format {
@@ -131,21 +131,21 @@
     desc.mFormatID = kAudioFormatLinearPCM;
     desc.mFormatFlags = 0;
     
-    desc.mSampleRate = [[[_parser properties] objectForKey:[NSNumber numberWithInteger:SAMPLE_RATE]] doubleValue];
-    desc.mBitsPerChannel = [[[_parser properties] objectForKey:[NSNumber numberWithInteger:BITS_PER_CHANNEL]] intValue];
-    desc.mChannelsPerFrame = [[[_parser properties] objectForKey:[NSNumber numberWithInteger:CHANNELS]] intValue];
+    desc.mSampleRate = [[[_decoder properties] objectForKey:[NSNumber numberWithInteger:SAMPLE_RATE]] doubleValue];
+    desc.mBitsPerChannel = [[[_decoder properties] objectForKey:[NSNumber numberWithInteger:BITS_PER_CHANNEL]] intValue];
+    desc.mChannelsPerFrame = [[[_decoder properties] objectForKey:[NSNumber numberWithInteger:CHANNELS]] intValue];
     desc.mBytesPerFrame = (desc.mBitsPerChannel / 8) * desc.mChannelsPerFrame;
     
     desc.mFramesPerPacket = 1;
     desc.mBytesPerPacket = desc.mBytesPerFrame * desc.mFramesPerPacket;
     desc.mReserved = 0;
     
-    if ([[[_parser properties] objectForKey:[NSNumber numberWithInteger:ENDIAN]] isEqualToString:@"big"]) {
+    if ([[[_decoder properties] objectForKey:[NSNumber numberWithInteger:ENDIAN]] isEqualToString:@"big"]) {
         desc.mFormatFlags |= kLinearPCMFormatFlagIsBigEndian;
         desc.mFormatFlags |= kLinearPCMFormatFlagIsAlignedHigh;
     }
     
-    if ([[[_parser properties] objectForKey:[NSNumber numberWithInteger:UNSIGNED]] boolValue] == NO) {
+    if ([[[_decoder properties] objectForKey:[NSNumber numberWithInteger:UNSIGNED]] boolValue] == NO) {
         desc.mFormatFlags |= kLinearPCMFormatFlagIsSignedInteger;
     }
     
@@ -153,7 +153,7 @@
 }
 
 -(id<BachMetadata>) metadata {
-    return [_parser metadata];
+    return [_decoder metadata];
 }
 
 @end

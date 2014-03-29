@@ -1,23 +1,23 @@
 //
-//  BachParserFactory.m
+//  BachDecoderFactory.m
 //  Bach
 //
 //  Created by Christian Benincasa on 2/1/14.
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
-#import "BachParserFactory.h"
+#import "BachDecoderFactory.h"
 
-#import "BachCoreAudioParser.h"
-#import "BachFLACParser.h"
+#import "BachCoreAudioDecoder.h"
+#import "BachFLACDecoder.h"
 
-@implementation BachParserFactory
+@implementation BachDecoderFactory
 
-+(id<BachParser>) create: (NSString*) ext {
++(id<BachDecoder>) create: (NSString*) ext {
     if ([[BachFileTypes coreAudioFileTypes] containsObject:ext]) {
-        return [[BachCoreAudioParser alloc] init];
+        return [[BachCoreAudioDecoder alloc] init];
     } else if ([[BachFileTypes flacFileTypes] containsObject:ext]) {
-        return [[BachFLACParser alloc] init];
+        return [[BachFLACDecoder alloc] init];
     } else {
         return nil;
     }

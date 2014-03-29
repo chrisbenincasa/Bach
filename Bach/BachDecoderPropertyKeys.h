@@ -1,5 +1,5 @@
 //
-//  BachParserPropertyKeys.h
+//  BachDecoderPropertyKeys.h
 //  Bach
 //
 //  Created by Christian Benincasa on 2/2/14.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, BachParserPropertyKeys) {
+typedef NS_ENUM(NSInteger, BachDecoderPropertyKeys) {
     BIT_RATE,
     BYTES_PER_PACKET,
     BYTES_PER_FRAME,

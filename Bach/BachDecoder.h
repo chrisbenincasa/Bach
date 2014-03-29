@@ -1,5 +1,5 @@
 //
-//  BachParser.h
+//  BachDecoder.h
 //  Bach
 //
 //  Created by Christian Benincasa on 2/1/14.
@@ -7,7 +7,7 @@
 //
 
 #import "BachMetadata.h"
-#import "BachParserPropertyKeys.h"
+#import "BachDecoderPropertyKeys.h"
 #import "BachSource.h"
 
 #import <Foundation/Foundation.h>
@@ -15,7 +15,7 @@
 
 @protocol BachSource;
 
-@protocol BachParser <NSObject>
+@protocol BachDecoder <NSObject>
 
 @property (nonatomic) AudioStreamBasicDescription description;
 @property (strong, nonatomic) NSDictionary* properties;

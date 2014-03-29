@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Christian Benincasa. All rights reserved.
 //
 
-#import "BachParserType.h"
+#import "BachDecoderType.h"
 
 #import <Foundation/Foundation.h>
 
